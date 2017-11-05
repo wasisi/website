@@ -5,7 +5,7 @@ from utilsApp.models import ActiveMixin
 from utilsApp.models import AffiliationMixin
 from utilsApp.models import UniqueIDMixin
 
-class Producer(UniqueIDMixin,UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificationDateMixin):
+class Producer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificationDateMixin):
 
     """
     Model for producer
@@ -20,7 +20,7 @@ class Producer(UniqueIDMixin,UniqueTitleMixin,ActiveMixin,AffiliationMixin,Creat
     def __str__(self):
         return self.title
 
-class Dealer(UniqueIDMixin,UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificationDateMixin):
+class Dealer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificationDateMixin):
     """
     Model for dealer
     """
