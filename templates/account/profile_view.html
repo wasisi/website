@@ -27,29 +27,14 @@
 
 <div class="row page-header">
   <div class="col-lg-12 text-center">
-		<p class="lead">Welcome {{user.username}}</p>
+		<p class="lead">Welcome</p>
    </div>
 </div>
 
 <div class="page-header row">
 	<div class="col-md-4">
-		<a href="{% url 'ecms_course_create_app:course_create_view' %}" role="button" class="btn btn-success">Create Course</a>
+		<a href="#" role="button" class="btn btn-success">Uplood Transaction</a>
 	</div>
 </div>
-
-<div class="row">
-  <div class="col-md-6">
-		<p class="lead"><strong>My Courses</strong></p>
-		{% for course in mycourses%}
-			<h3> <a href="{% url 'ecms_course_create_app:course_view' course.slug %}" >{{course.title}}</a></h3>
-			<div class="btn-group">
-				<a href="{% url 'ecms_course_create_app:course_view' course.slug %}" role="button" class="btn btn-primary">View</a>
-				<a href="{% url 'ecms_course_create_app:course_update_view' course.slug %}" role="button" class="btn btn-success">Edit</a>
-				<a href="{% url 'ecms_course_create_app:course_delete_view' course.slug %}" role="button" class="btn btn-danger">Delete</a>
-			</div>
-		{% endfor %}
-  </div>
-</div>
-
 </div>
 {% endblock %}
