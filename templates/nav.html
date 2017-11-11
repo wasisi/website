@@ -26,11 +26,7 @@
           </li>
 
           <li>
-            {% if userloggedin == False %}
-            <a href="#" >Log in</a>
-            {% else %}
-            <a href="#" >Log out</a>
-            {% endif %}
+            <a href="{% url 'accountApp:log_in' %}" >Log in</a>
           </li>
         </ul>
       </div><!-- /.navbar-collapse -->

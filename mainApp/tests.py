@@ -1,12 +1,13 @@
 from django.test import TestCase,Client
 from django.core.urlresolvers import resolve
 
-#local imports
+#app level imports
+from .apps import MainappConfig
 from . import views
 
 # Create your tests here.
 
-class WasisiAppTestBase(TestCase):
+class AppTestBase(TestCase):
     """
     Base class for unit testing of mainApp
     """
@@ -40,7 +41,7 @@ class WasisiAppTestBase(TestCase):
 #=======================================================================
 #=======================================================================
 
-class MainPageTest(WasisiAppTestBase):
+class MainPageTest(AppTestBase):
     """
     Class for testing index page functionality
     """
@@ -62,6 +63,13 @@ class MainPageTest(WasisiAppTestBase):
         """
         Test: the template index is the correct on
         """
-        self.template_used_is('/','wasisi/index.html')
+        self.template_used_is('/',MainappConfig.index_page_view_tmpl)
+
+    def test_index_title(self):
+        """
+        Test: the page title
+        """
+        response = self.client.get('/')
+        self.assertEqual(response.context['page_title'],MainappConfig.index_page_name)
 
 
