@@ -7,11 +7,14 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-				<a class="navbar-brand" href="#"><strong  id="ustdy-logo" class="ustdy-header-three">Wasisi</strong></a>
+				<a class="navbar-brand" href="/about"><strong  id="ustdy-logo" class="ustdy-header-three">Wasisi</strong></a>
       </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-left">
+          <li {% if selectcourses %}class="active" {%endif%}>
+            <a href="/about" >About</a>
+          </li>          
           <li {% if selectcourses %}class="active" {%endif%}>
 						<a href="#" >Coffee</a>
 					</li>
@@ -19,7 +22,7 @@
 		         <a href="#">Coffee Analytics</a>
 		      </li>
           <li {% if selecttutoring %}class="active" {%endif%}>
-					  <a href="#">Contact</a>
+					  <a href="/contact">Contact</a>
 					</li>
           <li {%if selectcontact == True %} class="active" {% endif %}>
             <a href="#" >Developer</a>
