@@ -14,8 +14,11 @@ class PostAdmin(admin.ModelAdmin):
    list_filter = ('status', 'created', 'publish', 'author')
 # Searchable fields using the search_fields attribute.   
    search_fields = ('title', 'body')
+# Prepopulate slug url using title   
    prepopulated_fields = {'slug': ('title',)}
+# Look up widget to replace dropdown. Useful when you have many users   
    raw_id_fields = ('author',)
+# Bar to navigate quickly through a date hierarchy   
    date_hierarchy = 'publish'
    ordering = ['status', 'publish']
 # Register classes

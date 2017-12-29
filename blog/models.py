@@ -4,6 +4,14 @@ from django.db import models
 # Field types as defined in https://docs.djangoproject.com/en/1.8/ref/models/fields/
 from django.utils import timezone
 from django.contrib.auth.models import User
+# Needed for canonical urls
+from django.core.urlresolvers import reverse
+
+class PublishedManager(models.Manager):
+       def get_queryset(self):
+           return super(PublishedManager,
+                        self).get_queryset()\
+                             .filter(status='published')
 class Post(models.Model):
   STATUS_CHOICES = (
       ('draft', 'Draft'),
@@ -26,6 +34,23 @@ class Post(models.Model):
   status = models.CharField(max_length=10,
                             choices=STATUS_CHOICES,
                             default='draft')
+# Add managers 
+# The default manager is objects
+# PublishedManager is our custom manager. Will allow us to retrieve posts using Post.published
+# e.g.  Post.published.filter(title__startswith='Who')  
+  objects = models.Manager()
+  published = PublishedManager()
+
+# Canonical URLs. 
+# We will use the reverse() method that allows you to build URLs by their name and passing optional parameters.
+# We are using the strftime() function to build the URL using month and day with leading zeros. 
+# We will use the get_absolute_url() method in our templates
+def get_absolute_url(self):
+          return reverse('blog:post_detail',
+                          args=[self.publish.year,
+                                self.publish.strftime('%m'),
+                                self.publish.strftime('%d'),
+                                self.slug])
 # Meta - Metadata     
 class Meta:
 # Sort results by the publish. We specify descending order designated by prefix

@@ -27,4 +27,8 @@ urlpatterns = [
         include('accountApp.urls',
                 namespace='accountApp',
                 app_name='accountApp')),
+    url(r'^blog/', 
+        include('blog.urls', 
+                namespace='blog',
+                app_name='blog')),
 ]
