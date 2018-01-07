@@ -59,3 +59,7 @@ LOGOUT_URL = reverse_lazy('logout')
 # Chapter 2 of Django by Example shows alternative way of setting up SMTP to send out emails. 
 # The following approach is useful during development
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Allow file upload in development server
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

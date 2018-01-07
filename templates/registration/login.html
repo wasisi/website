@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}Log-in{% endblock %}
+{% block title %}Logged out{% endblock %}
 
 {% block content %}
+ <div class="row">
+ <div class="col-lg-12 text-center">
     <h1 class="page-header">Log-in</h1>
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% else %}
-        <p>Please, use the following form to log-in:</p>
+        <p>Please, use the following form to log-in. If you don't have an account <a href="{% url "register" %}">register here</a></p>
     {% endif %}
     
     <div class="login-form">
@@ -19,4 +21,6 @@
         </form>
         <p><a href="{% url "password_reset" %}">Forgotten your password?</a></p>
     </div>
+</div>
+</div>    
 {% endblock %}
