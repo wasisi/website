@@ -10,6 +10,7 @@ INSTALLED_APPS = [
     'mainApp',
     'utilsApp',
     'uploadFileApp',
+    'accountApp',
 ]
 
 MIDDLEWARE = [

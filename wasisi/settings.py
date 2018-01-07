@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 
+SECRET_KEY = ''
 
 
 TEMPLATES = [
@@ -49,3 +49,13 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/static/'
+
+from django.core.urlresolvers import reverse_lazy # use reverse_lazy to build the URLs dynamically by their name.
+
+LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
+LOGIN_URL = reverse_lazy('login')
+LOGOUT_URL = reverse_lazy('logout')
+
+# Chapter 2 of Django by Example shows alternative way of setting up SMTP to send out emails. 
+# The following approach is useful during development
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

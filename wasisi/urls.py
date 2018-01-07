@@ -24,7 +24,6 @@ urlpatterns = [
 								 namespace='mainApp',
 								 app_name='mainApp')),
     url(r'account/',
-        include('accountApp.urls',
-                namespace='accountApp',
-                app_name='accountApp')),
+        include('accountApp.urls')),
+
 ]
