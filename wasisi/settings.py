@@ -40,6 +40,11 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+       'django.contrib.auth.backends.ModelBackend',
+       'accountApp.authentication.EmailAuthBackend',
+)
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
