@@ -27,8 +27,8 @@ urlpatterns = [
 				include('mainApp.urls',
 								 namespace='mainApp',
 								 app_name='mainApp')),
+    url(r'^', include('contactApp.urls')),
     
-
 ]
 
 # ONLY for DEVELOPMENT. Do not push to production

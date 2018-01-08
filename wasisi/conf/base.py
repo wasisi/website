@@ -11,6 +11,7 @@ INSTALLED_APPS = [
     'utilsApp',
     'uploadFileApp',
     'accountApp',
+    'contactApp',
 ]
 
 MIDDLEWARE = [

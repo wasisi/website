@@ -16,7 +16,7 @@
             <li {% if section == "coffee" %}class="selected"{% endif %}><a href="#">Coffee</a></li>
             <li {% if section == "directory" %}class="selected"{% endif %}><a href="#">Directory</a></li>
             <li {% if section == "analytics" %}class="selected"{% endif %}><a href="#">Coffee Analytics</a></li>
-            <li {% if section == "contacts" %}class="selected" {% endif %}><a href="#">Contact</a></li>
+            <li {% if section == "contact" %}class="selected" {% endif %}><a href="{% url "contact" %}">Contact</a></li>
             <li {% if section == "dashboard" %}class="selected"{% endif %}><a href="{% url "dashboard" %}">My dashboard</a></li>
         </ul>
         {% endif %}
