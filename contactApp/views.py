@@ -20,5 +20,6 @@ def contactView(request):
             return redirect('success')
     return render(request, 'contact/contact.html', {'contact_form': contact_form})
 
+# I need to know why the following isnt working
 def successView(request):
-    return render(request, 'contact/success.html', {'section': contact})
+    return render(request, 'contact/success.html', {'section': successView})
