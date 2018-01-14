@@ -13,6 +13,7 @@ INSTALLED_APPS = [
     'accountApp',
     'contactApp',
     'directoryApp',
+    'countiesApp',
 ]
 
 MIDDLEWARE = [

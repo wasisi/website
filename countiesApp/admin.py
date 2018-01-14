@@ -7,5 +7,6 @@ from .models import County
 
 class CountyAdmin(admin.ModelAdmin):
 	list_display = ['county_name', 'county_code']
+	ordering = ['county_name']
 
 admin.site.register(County, CountyAdmin)
