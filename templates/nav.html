@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="menu">
           <!-- We check the current section to add a selected class attribute to the corresponding <li> item in order to highlight the current section in the menu using CSS. -->
-            <li {% if section == "coffee" %}class="selected"{% endif %}><a href="#">Coffee</a></li>
+            <li {% if section == "about" %}class="selected"{% endif %}><a href="/about">About</a></li>
             <li {% if section == "directory" %}class="selected"{% endif %}><a href="#">Directory</a></li>
             <li {% if section == "analytics" %}class="selected"{% endif %}><a href="#">Coffee Analytics</a></li>
             <li {% if section == "contact" %}class="selected" {% endif %}><a href="{% url "contact" %}">Contact</a></li>

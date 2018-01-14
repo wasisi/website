@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'contactApp',
     'directoryApp',
     'countiesApp',
+    'basicpagesApp',
 ]
 
 MIDDLEWARE = [

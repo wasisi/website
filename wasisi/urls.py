@@ -28,6 +28,7 @@ urlpatterns = [
 								 namespace='mainApp',
 								 app_name='mainApp')),
     url(r'^', include('contactApp.urls')),
+    url(r'^', include('basicpagesApp.urls')),
     
 ]
 
