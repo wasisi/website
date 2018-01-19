@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'directoryApp',
     'countiesApp',
     'basicpagesApp',
+    'import_export',
 ]
 
 MIDDLEWARE = [

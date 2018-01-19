@@ -68,3 +68,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Allow file upload in development server
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+#needed by import_export https://simpleisbetterthancomplex.com/packages/2016/08/11/django-import-export.html
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+

@@ -58,7 +58,7 @@ class AffiliationMixin(models.Model):
     """
     Abstract base class for models with affiliation
     """
-    affiliation_name = models.CharField(max_length=200,unique=False)
+    affiliation_name = models.CharField(max_length=200,unique=False,blank=True)
 
     class Meta:
 		    abstract = True

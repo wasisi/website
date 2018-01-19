@@ -17,19 +17,17 @@ class Producer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificatio
     	('factory','Factory'),
     	)
     
-    ref = models.CharField(max_length=200)
+    ref = models.CharField(max_length=200, unique=True)
     actor = models.CharField(max_length=20,
     						choices=PRODUCER_CHOICES,
     						default='estate_small')
     lat = models.FloatField(default=0.0, blank=True, null=True)
     lon = models.FloatField(default=0.0, blank=True, null=True)
     notes = models.CharField(max_length=200, null=True, blank=True)
+    disambiguation = models.CharField(max_length=200, null=True, blank=True)
     
     # Lazy referencing to model contained in another app
-    county_name = models.ForeignKey(
-        'countiesApp.County',
-        on_delete=models.CASCADE,
-    )
+    county_name = models.ForeignKey('countiesApp.County')
 
     class Meta:
         db_table='Producer'
@@ -44,7 +42,7 @@ class Dealer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificationD
     """
     
     website = models.CharField(max_length=200)
-    ref = models.CharField(max_length=200)
+    ref = models.CharField(max_length=200, unique=True)
     active_website =models.BooleanField(default=True)
 
     class Meta:

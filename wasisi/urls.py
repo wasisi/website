@@ -29,6 +29,7 @@ urlpatterns = [
 								 app_name='mainApp')),
     url(r'^', include('contactApp.urls')),
     url(r'^', include('basicpagesApp.urls')),
+    url(r'^', include('directoryApp.urls', namespace='importexportApp', app_name='importexportApp')),
     
 ]
 

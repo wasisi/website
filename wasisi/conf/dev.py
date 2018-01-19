@@ -21,5 +21,9 @@ DATABASES = {
         'PASSWORD': 'letmein',
         'HOST': 'localhost',
         'PORT': '',
+        # #Adding following 2 lines because of Foreign Key issues. https://docs.djangoproject.com/en/dev/ref/databases/
+        'OPTIONS': {
+         "init_command": "SET foreign_key_checks = 0;",
+    }
     }
 }

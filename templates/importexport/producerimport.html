@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Import Producers{% endblock %}
+{% load staticfiles %}
+{% block extra_css %}<link href="{% static "cssjsfonts/css/animate.css" %}" rel="stylesheet" type="text/css">{% endblock %}
+
+{% block content %}
+<h1>Import Coffee Producers</h1>
+<ul>	
+<li>Take note of the fields that are required in your CSV template and the order they are expected.</li>
+<li>Files have to be coma (,) separated.</li>
+<li>Files should encoded as utf-8.</li>
+<li>Slug field should not be empty or contain space or any special characters.<li>
+<li>id field should be left blank.</li>
+<li>The file name should be dealerimport.csv</li>	
+</ul>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="producerimport">
+    <button type="submit">Upload</button>
+  </form>
+{% endblock %}
