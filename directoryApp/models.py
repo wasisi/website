@@ -17,7 +17,7 @@ class Producer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificatio
     	('factory','Factory'),
     	)
     
-    ref = models.CharField(max_length=200, unique=True)
+    producer_name = models.CharField(max_length=200) # can't be unique because there are producers that share the same names
     actor = models.CharField(max_length=20,
     						choices=PRODUCER_CHOICES,
     						default='estate_small')
