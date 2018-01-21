@@ -1,9 +1,27 @@
 from django.shortcuts import render
+
+# Import resources
 from .resources import DealerResource, ProducerResource
 
-# Create your views here.
+# Needed for file import
 from tablib import Dataset
 
+# Needed to display content as list and return errors
+from django.shortcuts import render, get_object_or_404
+
+# Import models
+from .models import Producer
+
+# Pagination
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+# Import generic views
+from django.views.generic import CreateView, DetailView, ListView
+from django.utils import timezone
+
+from django.db.models import Count
+
+# Create your views here.
 def dealer_upload(request):
     if request.method == 'POST':
         dealer_resource = DealerResource()
@@ -31,3 +49,18 @@ def producer_upload(request):
             producer_resource.import_data(dataset, dry_run=False)  # Actually import now
 
     return render(request, 'importexport/producerimport.html')    
+
+class ProducerDetailView(DetailView):
+    template_name = 'directory/detail.html'
+    model = Producer     
+
+# we are using custom published manager (published) declared in models.py
+# Using the generic ListView offered by Django. This base view is shorter and allows you to list objects of any kind.
+# Pagination is passed into the template from pagination.html in template folder.
+class ProducerListView(ListView):
+       queryset = Producer.published.all() # we could also use model = Producer and Django would generate the generic Producer.objects.all() QuerySet for us.
+       context_object_name = 'producers' #we define context
+       paginate_by = 50 # 50 producers in each page
+       template_name = 'directory/list.html'
+
+

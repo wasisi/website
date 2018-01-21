@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{{ producer.producer_name }}{% endblock %}
+{% load staticfiles %}
+{% block extra_css %}<link href="{% static "cssjsfonts/css/animate.css" %}" rel="stylesheet" type="text/css">{% endblock %}
+
+{% block content %}
+     <h1>{{ producer.producer_name }}</h1>
+       <p>{{ producer.title }}</p>
+       <p>{{ producer.county_name }}</p>
+       <p>{{ producer.actor }}</p>
+       <p>{{ producer.disambiguation }}</p>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Producer list{% endblock %}
+{% load staticfiles %}
+{% block extra_css %}<link href="{% static "cssjsfonts/css/animate.css" %}" rel="stylesheet" type="text/css">{% endblock %}
+
+{% block content %}
+     <h1>Kenya Coffee Producers</h1>
+     {% for producer in producers %}
+       <p>
+         <a href="{{ producer.get_absolute_url}}">
+           {{ producer.producer_name}}
+         </a> ({{ producer.title}})
+       </p>
+     {% endfor %}
+     {% include "pagination.html" with page=page_obj %}
+{% endblock %}

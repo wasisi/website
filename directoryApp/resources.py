@@ -9,14 +9,14 @@ from import_export import resources
 from import_export.widgets import ForeignKeyWidget
 from import_export.fields import Field
 
-
+# Define resource for the Dealer table
 class DealerResource(resources.ModelResource):
 	class Meta:
 		model = Dealer
 		# for more options 
 		# https://django-import-export.readthedocs.io/en/latest/getting_started.html#creating-import-export-resource        
 
-# Define model for the producer table
+# Define resource for the producer table
 class ProducerResource(resources.ModelResource):
 	# class import_export.widgets.ForeignKeyWidget(model, field='pk', *args,**kwawrgs)
 	# model - the model the ForeignKey refers to (required)

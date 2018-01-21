@@ -1,12 +1,21 @@
 from django.db import models
+
+# Add mixins from utilApp
 from utilsApp.models import CreationModificationDateMixin
 from utilsApp.models import UniqueTitleMixin
 from utilsApp.models import ActiveMixin
 from utilsApp.models import AffiliationMixin
 from utilsApp.models import UniqueIDMixin
 
-class Producer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificationDateMixin):
+# URL resolver needed by the get_absolute_url() 
+from django.core.urlresolvers import reverse
+# Declare custom manager
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager, self).get_queryset().filter(active='1')
 
+# Producer model
+class Producer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificationDateMixin):
     """
     Model for producer
     """
@@ -29,13 +38,21 @@ class Producer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificatio
     # Lazy referencing to model contained in another app
     county_name = models.ForeignKey('countiesApp.County')
 
+    # Set managers
+    objects = models.Manager() # The default manager.
+    published = PublishedManager() # The Dahl-specific manager.
+
+    # Meta
     class Meta:
         db_table='Producer'
         ordering=('title',)
 
-    def __str__(self):
+    def get_absolute_url(self):
+        return reverse('directoryApp:producer_detail', kwargs={'slug': self.slug})
+    def __unicode(self):
         return self.title
 
+# Dealer model
 class Dealer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificationDateMixin):
     """
     Model for dealer
@@ -51,3 +68,6 @@ class Dealer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificationD
 
     def __str__(self):
         return self.title
+    
+
+   
