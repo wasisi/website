@@ -38,7 +38,7 @@ class Producer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificatio
     # Lazy referencing to model contained in another app
     county_name = models.ForeignKey('countiesApp.County')
 
-    # Set managers
+    # Set managers to determine conditions that can be passed to views e.g. show only active
     objects = models.Manager() # The default manager.
     published = PublishedManager() # The Dahl-specific manager.
 

@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'countiesApp',
     'basicpagesApp',
     'import_export',
+    'coffeeApp',
 ]
 
 MIDDLEWARE = [
