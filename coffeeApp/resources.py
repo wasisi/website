@@ -16,9 +16,9 @@ class CoffeeTransactionsResource(resources.ModelResource):
 	# class import_export.widgets.DateWidget(format=None)
 	# model - the model the ForeignKey refers to (required)
 	# field - field on the related model used for looking up a particular object
-	REF = Field(
-		column_name='REF',
-		attribute='REF',
+	PRODUCERCODE = Field(
+		column_name='PRODUCERCODE',
+		attribute='PRODUCERCODE',
 		widget=ForeignKeyWidget(model=Producer, field='title'))
 	GRADE_GR = Field(
 		column_name='GRADE_GR',

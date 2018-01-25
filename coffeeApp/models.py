@@ -27,25 +27,25 @@ class CoffeeGrades(models.Model):
 class CoffeeTransactions(models.Model):
 	class Meta:
 		verbose_name_plural = "Nairobi Coffee Exchange Transactions" #this fixes incorrect plural "countys" from appearing in django admin
-	TRANSNR = models.CharField(max_length=20)
-	LOTNT = models.IntegerField()
+	SALENO = models.IntegerField()
+	TRANSNR = models.CharField(max_length=20, null=True)
+	LOTNR = models.IntegerField()
 	MARKS = models.CharField(max_length=100)
 	MARKS2 = models.CharField(max_length=100)
-	REF = models.ForeignKey('directoryApp.Producer') # Foreign Key
-	REF2 = models.CharField(max_length=20)
-	BAGMARK = models.CharField(max_length=20)
-	GRADE_GR = models.ForeignKey('CoffeeGrades') # Foreign Key
-	BAGSNR = models.CharField(max_length=3)
-	WEIGHT_Kgr = models.IntegerField()
-	SALENO = models.IntegerField()
-	BAGSBOUGHTNR = models.IntegerField()
-	WEIGHTBOUGHT_Kgr = models.IntegerField()
-	BUYERCODE = models.ForeignKey('directoryApp.Dealer') # Foreign Key
-	PRICE = models.IntegerField()
-	SEATNR = models.IntegerField()
-	AUCTCODE = models.IntegerField()
-	STATUS = models.IntegerField()
+	BAGMARK = models.CharField(max_length=20, null=True)
+	REF = models.CharField(max_length=20, null=True) # Changed from Ref2
+	PRODUCERCODE = models.ForeignKey('directoryApp.Producer', null=True) # Foreign Key. Changed from Ref
+	GRADE_GR = models.ForeignKey('CoffeeGrades', null=True) # Foreign Key
+	BAGSNR = models.IntegerField(null=True)
+	BAGSBOUGHTNR = models.IntegerField(null=True)
+	WEIGHT_Kgr = models.IntegerField(null=True)
+	WEIGHTBOUGHT_Kgr = models.IntegerField(null=True)
+	BUYERCODE = models.ForeignKey('directoryApp.Dealer', on_delete=models.CASCADE, null=True) # Foreign Key
+	PRICE = models.IntegerField(null=True)
+	RESPRICE = models.IntegerField(null=True)
+	AUCTCODE = models.IntegerField(null=True)
+	SEATNR = models.IntegerField(null=True)
+	STATUS = models.IntegerField(null=True)
 	ISODATE = models.DateField(auto_now=False, auto_now_add=False)
-	SEASON = models.CharField(max_length=10)
 	NOTES = models.TextField(blank=True, null=True)
 
