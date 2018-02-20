@@ -72,3 +72,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 #needed by import_export https://simpleisbetterthancomplex.com/packages/2016/08/11/django-import-export.html
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
+#Alternative way to specify an URL for a model using ABSOLUTE_URL_OVERRIDES, pg 174 Django by Example
+ABSOLUTE_URL_OVERRIDES = {
+       'auth.user': lambda u: reverse_lazy('user_detail',
+                                           args=[u.username])
+}

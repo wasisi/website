@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^', include('contactApp.urls')),
     url(r'^', include('basicpagesApp.urls')),
     url(r'^', include('directoryApp.urls', namespace='directoryApp', app_name='directoryApp')),
-    
+    url(r'^', include('coffeeApp.urls', namespace='coffeeApp', app_name='coffeeApp')),   
 ]
 
 # ONLY for DEVELOPMENT. Do not push to production

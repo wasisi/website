@@ -17,6 +17,8 @@ INSTALLED_APPS = [
     'basicpagesApp',
     'import_export',
     'coffeeApp',
+    'sorl.thumbnail',
+    'actions',
 ]
 
 MIDDLEWARE = [
