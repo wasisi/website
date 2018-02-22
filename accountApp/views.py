@@ -116,7 +116,7 @@ def user_detail(request, username):
     return render(request, 'account/user/detail.html', {'section': 'people',
                                                         'user': user})
 
-# View of to follow users
+# View to follow users
 @ajax_required
 @require_POST
 @login_required

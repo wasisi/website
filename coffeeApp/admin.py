@@ -19,15 +19,15 @@ class CoffeeGradesAdmin(admin.ModelAdmin):
 admin.site.register(CoffeeGrades, CoffeeGradesAdmin)
 
 class CoffeeTransactionsAdmin(ImportExportModelAdmin):
-	list_display = ['ISODATE', 'TRANSNR','PRODUCERCODE', 'BUYERCODE','GRADE_GR']
+	list_display = ['isodate', 'transnr','producercode', 'buyercode','grade_gr']
 	#raw_id_fields = ('PRODUCERCODE',) #replaces dropdown with search. Affects imports because Django expects ID field
-	ordering = ['-ISODATE'] #The - sign allows us to sort by the newest items first
+	ordering = ['-isodate'] #The - sign allows us to sort by the newest items first
 	resource_class = CoffeeTransactionsResource 
 	#you need to declare the resource_class or you will get errors like
 	#ValueError: invalid literal for int() with base 10: 'Baringo'
 	#id, created, updated, title, slug, active, affiliation_name, ref, actor, lat, lon, notes, disambiguation, county_name
 	#page 16 of Django by example
-	search_fields = ('PRODUCERCODE', 'TRANSNR')
+	search_fields = ('producercode', 'transnr')
 	pass
 
 admin.site.register(CoffeeTransactions, CoffeeTransactionsAdmin)

@@ -1,12 +1,13 @@
 from django.db import models
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 
 class CoffeeGrades(models.Model):
 	class Meta:
 		verbose_name_plural = "Coffee Grades" #this fixes incorrect plural "countys" from appearing in django admin
-	SIZE_CHOICES = (
+	size_choices = (
            ('0 - 5', 'very small'),
            ('6 - 10', 'small'),
            ('11 - 15', 'medium'),
@@ -16,7 +17,7 @@ class CoffeeGrades(models.Model):
 	grade = models.CharField(max_length=200, db_index=True)
 	grade_name = models.CharField(max_length=20, blank=True, null=True)
 	size = models.CharField(max_length=10,
-							choices=SIZE_CHOICES,
+							choices=size_choices,
 							blank=True, 
 							null=True)
 	description = models.TextField(blank=True, null=True)
@@ -27,25 +28,30 @@ class CoffeeGrades(models.Model):
 class CoffeeTransactions(models.Model):
 	class Meta:
 		verbose_name_plural = "Nairobi Coffee Exchange Transactions" #this fixes incorrect plural "countys" from appearing in django admin
-	SALENO = models.IntegerField()
-	TRANSNR = models.CharField(max_length=20, null=True)
-	LOTNR = models.IntegerField()
-	MARKS = models.CharField(max_length=100)
-	MARKS2 = models.CharField(max_length=100)
-	BAGMARK = models.CharField(max_length=20, null=True)
-	REF = models.CharField(max_length=20, null=True) # Changed from Ref2
-	PRODUCERCODE = models.ForeignKey('directoryApp.Producer', null=True) # Foreign Key. Changed from Ref
-	GRADE_GR = models.ForeignKey('CoffeeGrades', null=True) # Foreign Key
-	BAGSNR = models.IntegerField(null=True)
-	BAGSBOUGHTNR = models.IntegerField(null=True)
-	WEIGHT_Kgr = models.IntegerField(null=True)
-	WEIGHTBOUGHT_Kgr = models.IntegerField(null=True)
-	BUYERCODE = models.ForeignKey('directoryApp.Dealer', on_delete=models.CASCADE, null=True) # Foreign Key
-	PRICE = models.IntegerField(null=True)
-	RESPRICE = models.IntegerField(null=True)
-	AUCTCODE = models.IntegerField(null=True)
-	SEATNR = models.IntegerField(null=True)
-	STATUS = models.IntegerField(null=True)
-	ISODATE = models.DateField(auto_now=False, auto_now_add=False)
-	NOTES = models.TextField(blank=True, null=True)
+	saleno = models.IntegerField()
+	transnr = models.CharField(max_length=20, null=True)
+	lotnr = models.IntegerField()
+	marks = models.CharField(max_length=100)
+	marks2 = models.CharField(max_length=100)
+	bagmark = models.CharField(max_length=20, null=True)
+	ref = models.CharField(max_length=20, null=True) # Changed from Ref2
+	producercode = models.ForeignKey('directoryApp.Producer', null=True) # Foreign Key. Changed from Ref
+	grade_gr = models.ForeignKey('CoffeeGrades', null=True) # Foreign Key
+	bagsnr = models.IntegerField(null=True)
+	bagsboughtnr = models.IntegerField(null=True)
+	weight_kgr = models.IntegerField(null=True)
+	weightbought_kgr = models.IntegerField(null=True)
+	buyercode = models.ForeignKey('directoryApp.Dealer', on_delete=models.CASCADE, null=True) # Foreign Key
+	price = models.IntegerField(null=True)
+	resprice = models.IntegerField(null=True)
+	auctcode = models.IntegerField(null=True)
+	seatnr = models.IntegerField(null=True)
+	status = models.IntegerField(null=True)
+	isodate = models.DateField(auto_now=False, auto_now_add=False)
+	notes = models.TextField(blank=True, null=True)
+	users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
+		related_name='transactions_liked',
+		blank=True)
+	def get_absolute_url(self):
+           return reverse('coffeeApp:transaction_detail', args=[self.id])
 

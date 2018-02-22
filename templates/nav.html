@@ -15,7 +15,8 @@
           <!-- We check the current section to add a selected class attribute to the corresponding <li> item in order to highlight the current section in the menu using CSS. -->
             <li {% if section == "about" %}class="selected"{% endif %}><a href="/about">About</a></li>
             <li {% if section == "producers" %}class="selected"{% endif %}><a href="/directory/producers">Producers</a></li>
-            <li {% if section == "analytics" %}class="selected"{% endif %}><a href="#">Coffee Analytics</a></li>
+            <li {% if section == "analytics" %}class="selected"{% endif %}><a href="/graph/chart">Analytics</a></li>
+            <li {% if section == "analytics" %}class="selected"{% endif %}><a href="/transactions/list/">Transactions</a></li>
             <li {% if section == "contact" %}class="selected" {% endif %}><a href="{% url "contact" %}">Contact</a></li>
             <li {% if section == "dashboard" %}class="selected"{% endif %}><a href="{% url "dashboard" %}">My dashboard</a></li>
             <li {% if section == "users" %}class="selected"{% endif %}><a href="{% url "user_list" %}">Website users</a></li>

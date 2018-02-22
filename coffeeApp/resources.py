@@ -16,21 +16,21 @@ class CoffeeTransactionsResource(resources.ModelResource):
 	# class import_export.widgets.DateWidget(format=None)
 	# model - the model the ForeignKey refers to (required)
 	# field - field on the related model used for looking up a particular object
-	PRODUCERCODE = Field(
-		column_name='PRODUCERCODE',
-		attribute='PRODUCERCODE',
+	producercode = Field(
+		column_name='producercode',
+		attribute='producercode',
 		widget=ForeignKeyWidget(model=Producer, field='title'))
-	GRADE_GR = Field(
-		column_name='GRADE_GR',
-		attribute='GRADE_GR',
+	grade_gr = Field(
+		column_name='grade_gr',
+		attribute='grade_gr',
 		widget=ForeignKeyWidget(model=CoffeeGrades, field='grade'))
-	BUYERCODE = Field(
-		column_name='BUYERCODE',
-		attribute='BUYERCODE',
+	buyercode = Field(
+		column_name='buyercode',
+		attribute='buyercode',
 		widget=ForeignKeyWidget(model=Dealer, field='ref'))
-	ISODATE = Field(
-		column_name='ISODATE',
-		attribute='ISODATE',
+	isodate = Field(
+		column_name='isodate',
+		attribute='isodate',
 		widget=DateWidget(format=None)) # You can define format e.g. %Y-%m-%d
 	class Meta:
 		model = CoffeeTransactions
