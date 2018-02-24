@@ -1,0 +1,83 @@
+<!-- transactions/detail.html -->
+
+{% extends "base.html" %}
+
+{% block title %}{{ transaction.id }}{% endblock %}
+
+{% block content %}
+    <h1>{{ transaction.id }}</h1>
+    <p>Sale number: {{ transaction.saleno }}</p>
+    <p>Transaction number: {{ transaction.transnr }}</p>
+    <p>Lot number: {{ transaction.lotnr }}</p>
+    <p>Marks: {{ transaction.marks }}</p>
+    <p>Reference: {{ transaction.ref }}</p>
+    <p>Producer code: {{ transaction.producercode }}</p>
+    <p>Grade: {{ transaction.grade_gr }}</p>
+    <p>Bags: {{ transaction.bagsnr }}</p>
+    <p>Weight: {{ transaction.weight_kgr }}</p>
+    <p>Buyer code: {{ transaction.buyercode }}</p>
+    <p>Price: {{ transaction.price }} USD/50Kg bag</p>
+    <p>Reserve price: {{ transaction.resprice }}</p>
+    <p>Auction code: {{ transaction.auctcode }}</p>
+    <p>Date of auction: {{ transaction.isodate }}</p>
+    <p>Notes: {{ transaction.notes }}</p>
+
+    {% with total_likes=transaction.users_like.count users_like=transaction.users_like.all %}
+
+        <div class="image-info">
+                <div>
+                    <span class="count">
+                        <span class="total">{{ total_likes }}</span>
+                        like{{ total_likes|pluralize }}
+                    </span>
+                    <a href="#" data-id="{{ transaction.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like button">
+                        {% if request.user not in users_like %}
+                            Like
+                        {% else %}
+                            Unlike
+                        {% endif %}
+                    </a>
+                </div>
+        </div>
+
+        <div class="image-likes">
+            {% for user in CoffeeTransactions.users_like.all %}
+                <div>
+                    <img src="{{ user.profile.photo.url }}">
+                    <p>{{ user.first_name }}</p>
+                </div>
+            {% empty %}
+                Nobody likes this transaction yet.
+            {% endfor %}
+        </div>
+    {% endwith %}
+{% endblock %}
+
+{% block domready %}
+    $('a.like').click(function(e){
+        e.preventDefault();
+        $.post('{% url "coffeeApp:like_transaction" %}',
+
+            {
+                id: $(this).data('id'),
+                action: $(this).data('action')
+            },
+            function(data){
+                if (data['status'] == 'ok')
+                {
+                    var previous_action = $('a.like').data('action');
+
+                    // toggle data-action
+                    $('a.like').data('action', previous_action == 'like' ? 'unlike' : 'like');
+                    // toggle link text
+                    $('a.like').text(previous_action == 'like' ? 'Unlike' : 'Like');
+
+                    // update total likes
+                    var previous_likes = parseInt($('span.count .total').text());
+                    $('span.count .total').text(previous_action == 'like' ? previous_likes + 1 : previous_likes - 1);
+                }
+        });
+
+    });
+{% endblock %}
+

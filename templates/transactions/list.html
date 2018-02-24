@@ -1,0 +1,36 @@
+<!-- transactions/list.html -->
+{% extends "base.html" %}
+
+{% block title %}Coffee Transactions{% endblock %}
+
+{% block content %}
+    <h1>Nairobi Coffee Exchange Transactions</h1>
+    <p>This is the full list of all transactions at the Nairobi Coffee Exchange since January 2015. Click on the ID to reveal full details of the transaction. The bookmarking feature in the detail view does not work yet. The display will be made into a table and filters will be added. At the moment AJAX loading is used for infinite scroll</p>
+    <div id="image-list">
+        {% include "transactions/list_ajax.html" %}
+    </div>
+{% endblock %}
+
+{% block domready %}
+    var page = 1;
+    var empty_page = false;
+    var block_request = false;
+
+    $(window).scroll(function() {
+        var margin = $(document).height() - $(window).height() - 200;
+        if  ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
+		    block_request = true;
+		    page += 1;
+		    $.get('?page=' + page, function(data) {
+		        if(data == '')
+		        {
+		            empty_page = true;
+		        }
+		        else {
+                    block_request = false;
+                    $('#image-list').append(data);
+    	        }
+            });
+    	}
+    });
+{% endblock %}

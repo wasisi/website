@@ -2,7 +2,7 @@
 from django.conf.urls import url
 
 
-from .views import graph, play_count_by_month, transaction_detail, transaction_like, transaction_list, producer_transaction_list
+from .views import graph, play_count_by_month, transaction_detail, transaction_like, transaction_list
 
 #from . import views
 app_name = 'coffeeApp'

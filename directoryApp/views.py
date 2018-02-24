@@ -11,6 +11,7 @@ from django.shortcuts import render, get_object_or_404
 
 # Import models
 from .models import Producer
+from coffeeApp.views import CoffeeTransactions
 
 # Pagination
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -50,9 +51,21 @@ def producer_upload(request):
 
     return render(request, 'importexport/producerimport.html')    
 
-class ProducerDetailView(DetailView):
-    template_name = 'directory/detail.html'
-    model = Producer     
+# Below uses in built DJANGO detail view
+#class ProducerDetailView(DetailView):
+    #template_name = 'directory/detail.html'
+    #model = Producer     
+
+def ProducerDetailView(request, slug):
+       producer = get_object_or_404(Producer, slug=slug)
+       transactions = CoffeeTransactions.objects.all()[:10]
+        
+        # List of transactions to be squeezed in here
+        
+
+       return render(request, 'directory/detail.html', {'section': 'producer',
+                                                        'producer': producer,
+                                                        'transactions': transactions})    
 
 # we are using custom published manager (published) declared in models.py
 # Using the generic ListView offered by Django. This base view is shorter and allows you to list objects of any kind.

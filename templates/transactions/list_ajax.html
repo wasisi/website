@@ -1,0 +1,9 @@
+<!-- transactions/list_ajax.html -->
+{% for transaction in transactions %}
+
+<div class="info">
+	<a href="{{ transaction.get_absolute_url }}" class="title">
+		{{ transaction.id }}
+	</a>
+</div>
+{% endfor %}

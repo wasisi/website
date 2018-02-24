@@ -77,28 +77,5 @@ def transaction_list(request):
                   'transactions/list.html',
                    {'section': 'transactions', 'transactions': transactions})
 
-#List view for producer transactions
-@login_required
-def producer_transaction_list(request):
-    producer_transactions = CoffeeTransactions.objects.all()
-    paginator = Paginator(producer_transactions, 8)
-    page = request.GET.get('page')
-    try:
-        producer_transactions = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer deliver the first page
-        producer_transactions = paginator.page(1)
-    except EmptyPage:
-        if request.is_ajax():
-            # If the request is AJAX and the page is out of range return an empty page
-            return HttpResponse('')
-        # If page is out of range deliver last page of results
-        producer_transactions = paginator.page(paginator.num_pages)
-    if request.is_ajax():
-        return render(request,
-                      'transactions/producer_list_ajax.html',
-                      {'section': 'producer_transactions', 'producer_transactions': producer_transactions})
-    return render(request,
-        'transactions/list.html',
-        {'section': 'producer_transactions', 'producer_transactions': producer_transactions}) 
+
 

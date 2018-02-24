@@ -1,0 +1,9 @@
+<!-- transactions/list.html -->
+{% for transaction in producer_transactions %}
+
+<div class="info">
+	<a href="{{ transaction.get_absolute_url }}" class="title">
+		{{ transaction.id }}
+	</a>
+</div>
+{% endfor %}

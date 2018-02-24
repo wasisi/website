@@ -12,7 +12,12 @@
        <p>{{ producer.disambiguation }}</p>
        <h1>Nairobi Coffee Exchange Transactions</h1>
        <p>The goal is to list all the transactions of the producer here as an extract of <a href="/transactions/list/"> Transaction List</a> and filtered by the producercode foreign key field. Once this works we will use same approach for the Dealers. The fields to be displayed will be customised for the different audience groups.</p>
-       	{% include "transactions/producer_list_ajax.html" %}
+       	
+         {% for transaction in transactions %}
+        <p> {{ transaction.id }} </p>
+    {% empty %}
+        There are no transactions for this producer yet.
+    {% endfor %}
 {% endblock %}
 
 {% block domready %}
