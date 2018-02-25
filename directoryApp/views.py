@@ -21,6 +21,10 @@ from django.views.generic import CreateView, DetailView, ListView
 from django.utils import timezone
 
 from django.db.models import Count
+from django.http import HttpResponse
+from common.decorators import ajax_required
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def dealer_upload(request):
@@ -56,16 +60,30 @@ def producer_upload(request):
     #template_name = 'directory/detail.html'
     #model = Producer     
 
-def ProducerDetailView(request, slug):
-       producer = get_object_or_404(Producer, slug=slug)
-       transactions = CoffeeTransactions.objects.all()[:10]
-        
-        # List of transactions to be squeezed in here
-        
-
-       return render(request, 'directory/detail.html', {'section': 'producer',
-                                                        'producer': producer,
-                                                        'transactions': transactions})    
+def ProducerDetailView(request, id, slug):
+    producer = get_object_or_404(Producer, id=id, slug=slug)
+    producerid = Producer.objects.get(id=id)
+    transactions = CoffeeTransactions.objects.filter(producercode=producerid)
+    paginator = Paginator(transactions, 8)
+    page = request.GET.get('page')
+    try:
+        transactions = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        transactions = paginator.page(1)
+    except EmptyPage:
+        if request.is_ajax():
+            # If the request is AJAX and the page is out of range return an empty page
+            return HttpResponse('')
+        # If page is out of range deliver last page of results
+        transactions = paginator.page(paginator.num_pages)
+    if request.is_ajax():
+        return render(request,
+                      'transactions/list_ajax.html',
+                      {'section': 'transactions', 'transactions': transactions})
+    return render(request, 'directory/detail.html', {'section': 'producer',
+                                                    'producer': producer,
+                                                    'transactions': transactions})    
 
 # we are using custom published manager (published) declared in models.py
 # Using the generic ListView offered by Django. This base view is shorter and allows you to list objects of any kind.

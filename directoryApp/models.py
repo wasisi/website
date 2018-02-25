@@ -48,9 +48,10 @@ class Producer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificatio
         ordering=('title',)
 
     def get_absolute_url(self):
-        return reverse('directoryApp:producer_detail', kwargs={'slug': self.slug})
+        #return reverse('directoryApp:producer_detail', kwargs={'slug': self.slug})
+        return reverse('directoryApp:producer_detail', args=[self.id, self.slug])
     def __unicode(self):
-        return self.title  
+        return self.title
 
 # Dealer model
 class Dealer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificationDateMixin):

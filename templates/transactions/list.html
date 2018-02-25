@@ -6,7 +6,7 @@
 {% block content %}
     <h1>Nairobi Coffee Exchange Transactions</h1>
     <p>This is the full list of all transactions at the Nairobi Coffee Exchange since January 2015. Click on the ID to reveal full details of the transaction. The bookmarking feature in the detail view does not work yet. The display will be made into a table and filters will be added. At the moment AJAX loading is used for infinite scroll</p>
-    <div id="image-list">
+    <div id="transaction-list">
         {% include "transactions/list_ajax.html" %}
     </div>
 {% endblock %}
@@ -28,7 +28,7 @@
 		        }
 		        else {
                     block_request = false;
-                    $('#image-list').append(data);
+                    $('#transaction-list').append(data);
     	        }
             });
     	}
