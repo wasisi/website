@@ -79,7 +79,7 @@ def ProducerDetailView(request, id, slug):
         transactions = paginator.page(paginator.num_pages)
     if request.is_ajax():
         return render(request,
-                      'transactions/list_ajax.html',
+                      'transactions/table_ajax.html',
                       {'section': 'transactions', 'transactions': transactions})
     return render(request, 'directory/detail.html', {'section': 'producer',
                                                     'producer': producer,

@@ -14,12 +14,14 @@
     <p>Producer code: {{ transaction.producercode }}</p>
     <p>Grade: {{ transaction.grade_gr }}</p>
     <p>Bags: {{ transaction.bagsnr }}</p>
-    <p>Weight: {{ transaction.weight_kgr }}</p>
+    <p>Weight: {{ transaction.weight_kgr }} Kg</p>
     <p>Buyer code: {{ transaction.buyercode }}</p>
-    <p>Price: {{ transaction.price }} USD/50Kg bag</p>
     <p>Reserve price: {{ transaction.resprice }}</p>
+    <p>Price: {{ transaction.price }} USD/50Kg bag</p>
+    <p>Unit price: {{ transaction.unitprice }} USD/kg</p>
     <p>Auction code: {{ transaction.auctcode }}</p>
     <p>Date of auction: {{ transaction.isodate }}</p>
+    <p>Value: {{ transaction.value }} USD</p>
     <p>Notes: {{ transaction.notes }}</p>
 
     {% with total_likes=transaction.users_like.count users_like=transaction.users_like.all %}

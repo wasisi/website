@@ -52,6 +52,13 @@ class CoffeeTransactions(models.Model):
 	users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
 		related_name='transactions_liked',
 		blank=True)
+	@property
+	def value(self):
+		return (self.price * self.weightbought_kgr)/50
+	def unitprice(self):
+		return (self.price)/50	
+
 	def get_absolute_url(self):
            return reverse('coffeeApp:transaction_detail', args=[self.id])
+
 
