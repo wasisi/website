@@ -1,40 +1,72 @@
-<div class="container" id="container-footer">
-  <footer id="footer"><!-- Footer -->
-    <div class="row footer-top-row">
-      <div class="col-md-4">
-        <a href="#"><h4 class="ustdy-header-three"><strong>Wasisi</strong></h4></a>
-        <ul class="list-unstyled list-inline list-social-icons">
-		      <li><a href="#"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-		      <li><a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
-		      <li><a href="#"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-		    </ul>
-      </div>
-      <div class="col-md-4">
-        <h4 class="ustdy-header-three"><strong>COMPANY</strong></h4>
-        <ul class="list-unstyled list-social-icons">
-		      <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
-         </ul>
-		   </div>
-       <div class="col-md-4">
-          <h4 class="ustdy-header-three"><strong>PLATFORM</strong></h4>
-           <ul class="list-unstyled list-social-icons">
-             <li><a href="#">Coffee Analytics</a></li>
-             <li><a href="{% url "login" %}" >Log in</a></li>
-           </ul>
-      </div>
+<div class="prefooter">
+  <div class="row">
+    <div class="col-md-4">
+      <h6>Platform</h6>
+      <ul class="no-bullet">
+        <li><a href="#">Producer</a></li>
+        <li><a href="#">Dealers</a></li>
+        <li><a href="#">Analytics</a></li>
+        <li><a href="#">Glossary</a></li>
+      </ul>
     </div>
+    <div class="col-md-4">
+      <h6>Company</h6>
+      <p>We care about coffee and the wellbeing of the hardworking farmers and people who consume, trade, promote and research about it.</p>
+      <ul class="list-unstyled list-social-icons">
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="col-md-4">
+      <h6>Profile</h6>
+      <ul class="list-unstyled">
+        <li>
+          {% if request.user.is_authenticated %}
+          <a href="{% url "logout" %}">Logout</a>
+          {% else %}
+          <a href="{% url "login" %}">Log-in</a>
+          {% endif %}
+        </li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url "dashboard" %}">Dashboard</a></li>
+        <li><a href="/account/users">Users</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
 
-		<div class="row footer-btm-row">
-			<div class="col-lg-12 text-center">
-           <p>Copyright &copy; <a href="#">Wasisi</a></p>
+<div class="footer">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="pad1">&copy; <a href="#">Wasisi</a>. All rights reserved.</p>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <ul class="list-inline right pad1">
+            <li><a href="#"><i class="fa fa-rss fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-facebook fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-pinterest fa-2x"></i></a></li>
+          </ul>
+        </div>
+        <div class="col-sm-12">
+          <p class="text-right"><a href="http://blacksailor.com">Terms of service</a></p>
+        </div>
       </div>
     </div>
- </footer>
-</div><!-- /.container -->
+  </div>
+</div>
+<!-- /.container -->
 
 		{% load staticfiles %}
     <script src="{% static "cssjsfonts/js/jquery.js" %}"></script>
     <script src="{% static "cssjsfonts/js/bootstrap.min.js" %}"></script>
     <script src="{% static "cssjsfonts/js/elearncms.js" %}"></script>
+    <script src="{% static "cssjsfonts/js/foundation.min.js" %}"></script>
+    <script>$(document).foundation();</script>
 		{% block extra_js %}{% endblock %}

@@ -53,7 +53,11 @@ STATICFILES_DIRS = [
      os.path.join(BASE_DIR,'static'),
 ]
 
+# All settings common to all environments
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT,'static')
 
 from django.core.urlresolvers import reverse_lazy # use reverse_lazy to build the URLs dynamically by their name.
 

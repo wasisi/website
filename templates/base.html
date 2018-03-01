@@ -16,14 +16,26 @@
     <!-- Custom CSS -->
     <link href="{% static "cssjsfonts/css/modern-business.css" %}" rel="stylesheet">
 
+    <!-- Foundation CSS -->
+    <link href="{% static "cssjsfonts/css/foundation.css" %}" rel="stylesheet">
+    <meta class="foundation-data-attribute-namespace">
+    <meta class="foundation-mq-xxlarge">
+    <meta class="foundation-mq-xlarge">
+    <meta class="foundation-mq-large">
+    <meta class="foundation-mq-medium">
+    <meta class="foundation-mq-small">
+    <meta class="foundation-mq-topbar">
+
     <!-- Custom Fonts -->
     <link href="{% static "cssjsfonts/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
     <link href="{% static "cssjsfonts/css/base.css" %}" rel="stylesheet" type="text/css">
+
+    <script src="{% static "cssjsfonts/js/modernizr.js" %}"></script>
 </head>
 
 <body>
-    <div id="header">
-    {% include 'nav.html' %}
+    
+{% include 'nav.html' %}
  
  <!-- Add messaging framework globally to the project -->   
     {% if messages %}
@@ -42,6 +54,7 @@
         {% block content %}
         {% endblock %}
     </div>
+
 {% include 'footer.html' %}
 
 <!--This is needed for AJAX functionality e.g. in follow user/coffee producer -->
