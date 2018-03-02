@@ -3,10 +3,8 @@
 {% block content %}
 <div class="container">
 	{% for basic_page_object in basic_page %}
-			<h1>About us</h1>
-			<p>
-				{{basic_page_object.body}}
-			</p>
+	<h1>About us</h1>
+	<p>{{basic_page_object.body}}</p>
 	{% endfor %}
 </div>
 {% endblock %}

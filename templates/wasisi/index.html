@@ -4,4 +4,44 @@
 {% block extra_css %}<link href="{% static "cssjsfonts/css/animate.css" %}" rel="stylesheet" type="text/css">{% endblock %}
 {% block content %}
 
+<div class="row">
+  <div class="col-sm-12 home-image">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 medium-offset-3">
+        <div class="blue_mark">
+          <h3>Join mykahawa</h3>
+          <p>Register as a member to get access to Nairobi Coffee Exchange transactions, analytics, insights and much more.</p>
+            <a class="button" href="/register">Sign up now </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="text-center">Who we are</h1>
+    <p class="text-center">We care about coffee and the wellbeing of the hardworking farmers and people who consume, trade, promote and research about it.</p>
+  </div>
+</div>
+<!-- Featured Section -->
+
+<div class="lighten">
+  <div class="row">
+    <h1 class="text-center">What we do</h1>
+    <div class="col-sm-12 col-md-4">
+      <a href="/directory/producers"><p class="large-number text-center"> {{ num_producers }}</p></a>
+      <p class="text-center">Producers.</p>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <p class="large-number text-center">{{ num_dealers }}</p>
+      <p class="text-center">Dealers</p>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <p class="large-number text-center">{{ num_transactions }}</p>
+      <p class="text-center">Transactions since January 2015</p>
+    </div>
+  </div>
+</div>   
+
 {% endblock %}

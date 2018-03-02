@@ -10,7 +10,7 @@ from tablib import Dataset
 from django.shortcuts import render, get_object_or_404
 
 # Import models
-from .models import Producer
+from .models import Producer, Dealer
 from coffeeApp.views import CoffeeTransactions
 
 # Pagination
@@ -93,5 +93,4 @@ class ProducerListView(ListView):
        context_object_name = 'producers' #we define context
        paginate_by = 50 # 50 producers in each page
        template_name = 'directory/list.html'
-
 

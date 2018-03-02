@@ -5,8 +5,13 @@
      background-color:#f5f5f5;
 }
  body {
-     padding-top: 50px;
+     padding-top: 60px;
     /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+@media (max-width: 979px) {
+    body {
+        padding-top: 0px;
+    }
 }
 
 /* Navigation customise bootstrap*/
@@ -304,7 +309,7 @@
     margin-top:1rem;
 }
  .home-image {
-     background:url(../images/sunset.jpg) no-repeat;
+     background:url(/static/img/coffee-3076958_1920.jpg) no-repeat;
     background-position:-50px -420px;
 }
  .blue_mark {
@@ -392,6 +397,17 @@
      border-color: #74bfdd;
      color: #4f4f4f;
 }
+
+/* Alert boxes */
+.large-number {
+     color: #3c3f47;
+     float: none;
+     font-size: 2em;
+     font-family: gothamlight, Arial, "Helvetica Neue", Helvetica, sans-serif;
+     margin: 0;
+}
+
+
  @media only screen and (max-width: 40em) {
      .blue_mark {
         margin-top:2.5rem;
