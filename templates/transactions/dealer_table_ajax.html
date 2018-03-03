@@ -1,0 +1,16 @@
+<!-- transactions/dealer_table_ajax.html -->
+
+<div class='table-responsive' id='table'>
+  <table class='table table-striped'>	
+    <thread>
+      {% for transaction in transactions %}
+      <tr>
+        <td><a href="{{ transaction.get_absolute_url }}" class="title">{{ transaction.id }}</a></td>
+        <td>{{ transaction.saleno }}</td>
+        <td>{{ transaction.grade_gr }}</td>
+        <td>{{ transaction.value }}</td>
+      </tr>
+     {% endfor %}
+     </thread>
+  </table>
+</div>

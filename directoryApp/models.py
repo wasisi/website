@@ -67,6 +67,10 @@ class Dealer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificationD
         db_table='Dealer'
         ordering=('title',)
 
+    def get_absolute_url(self):
+        #return reverse('directoryApp:producer_detail', kwargs={'slug': self.slug})
+        return reverse('directoryApp:dealer_detail', args=[self.id, self.slug])
+
     def __str__(self):
         return self.title
     

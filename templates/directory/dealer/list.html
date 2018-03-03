@@ -1,24 +1,24 @@
-<!-- directory/producer/list.html -->
+<!-- directory/dealer/list.html -->
 
 {% extends 'base.html' %}
-{% block title %}Producer list{% endblock %}
+{% block title %}Dealer list{% endblock %}
 {% load staticfiles %}
 {% block extra_css %}<link href="{% static "cssjsfonts/css/animate.css" %}" rel="stylesheet" type="text/css">{% endblock %}
 
 {% block content %}
-<h1>Kenya Coffee Producers</h1>
+<h1>Kenya Coffee Dealers</h1>
 <div class='table-responsive' id='transaction-list'>
   <table class='table table-striped'> 
     <thread>
     <th>
     	<td>Reference</td>
-      	<td>County</td>
+      	<td>Website</td>
    	</th>
-    {% for producer in producers %}	
+    {% for dealer in dealers %}	
       <tr>
-        <td><a href="{{ producer.get_absolute_url }}" class="title">{{ producer.producer_name }}</a></td>
-        <td>{{ producer.title }}</td>
-        <td>{{ producer.county_name }}</td>
+        <td><a href="{{ dealer.get_absolute_url }}" class="title">{{ dealer.title }}</a></td>
+        <td>{{ dealer.ref }}</td>
+        <td>{{ dealer.website }}</td>
       </tr>
     {% endfor %}
      </thread>

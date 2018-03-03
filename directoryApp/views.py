@@ -79,7 +79,7 @@ def ProducerDetailView(request, id, slug):
         transactions = paginator.page(paginator.num_pages)
     if request.is_ajax():
         return render(request,
-                      'transactions/table_ajax.html',
+                      'transactions/producer_table_ajax.html',
                       {'section': 'transactions', 'transactions': transactions})
     return render(request, 'directory/detail.html', {'section': 'producer',
                                                     'producer': producer,
@@ -93,4 +93,38 @@ class ProducerListView(ListView):
        context_object_name = 'producers' #we define context
        paginate_by = 50 # 50 producers in each page
        template_name = 'directory/list.html'
+
+def DealerDetailView(request, id, slug):
+    dealer = get_object_or_404(Dealer, id=id, slug=slug)
+    dealerid = Dealer.objects.get(id=id)
+    transactions = CoffeeTransactions.objects.filter(buyercode=dealerid)
+    paginator = Paginator(transactions, 8)
+    page = request.GET.get('page')
+    try:
+        transactions = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        transactions = paginator.page(1)
+    except EmptyPage:
+        if request.is_ajax():
+            # If the request is AJAX and the page is out of range return an empty page
+            return HttpResponse('')
+        # If page is out of range deliver last page of results
+        transactions = paginator.page(paginator.num_pages)
+    if request.is_ajax():
+        return render(request,
+                      'transactions/dealer_table_ajax.html',
+                      {'section': 'transactions', 'transactions': transactions})
+    return render(request, 'directory/dealer/detail.html', {'section': 'dealer',
+                                                    'dealer': dealer,
+                                                    'transactions': transactions})    
+
+# we are using custom published manager (published) declared in models.py
+# Using the generic ListView offered by Django. This base view is shorter and allows you to list objects of any kind.
+# Pagination is passed into the template from pagination.html in template folder.
+class DealerListView(ListView):
+       queryset = Dealer.objects.all() # we could also use model = Producer and Django would generate the generic Producer.objects.all() QuerySet for us.
+       context_object_name = 'dealers' #we define context
+       paginate_by = 50 # 50 producers in each page
+       template_name = 'directory/dealer/list.html'       
 
