@@ -5,32 +5,70 @@
 
 {% block content %}
     <h1>Nairobi Coffee Exchange Transactions</h1>
+    <p>The Nairobi Coffee Exchange (NCE) is a central coffee auction where an estimated 80% of Kenya's coffee is traded. This page provides a summary of curated information that is prepared and disseminated by the NCE at the end of each auction on its website. </p>
     <p>This is the full list of all transactions at the Nairobi Coffee Exchange since January 2015. Click on the ID to reveal full details of the transaction. The bookmarking feature in the detail view does not work yet. The display will be made into a table and filters will be added. At the moment AJAX loading is used for infinite scroll</p>
-    <div id="transaction-list">
-        {% include "transactions/list_ajax.html" %}
+
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+
+    <div class='table-responsive'>
+        <table class='table table-striped'>
+            <thread>
+                <th>
+                    <td>Producer code</td>
+                    <td>Buyer code</td>
+                </th>
+                {% for transaction in transactions %}
+                <tr>
+                    <td><a href="{{ transaction.get_absolute_url }}" class="title">{{ transaction.id }}</a></td>
+                    <td>{{ transaction.producercode }}</td>
+                    <td>{{ transaction.buyercode }}</td>
+                </tr>
+                {% endfor %}
+            </thread>
+        </table>
     </div>
-{% endblock %}
+   <div class = "container">
+  <div class = "col-md-6">
+    <ul class="pager">
+      <span class="step-links">
+        {% if transactions.has_previous %}
+        <li class="previous"> <a href="?page={{ transactions.previous_page_number }}">Previous</a></li>
+        {% else %}
+        <li class="previous"> <a title = "No transactions available">Previous</a></li>
+        {% endif %}
+        {% if transactions.has_next %}
+        <li class="next"><a href="?page={{ transactions.next_page_number }}">Next</a></li>
+        {% else %}
+        <li class="next"><a title = "No transactions available">Next</a></li>
+        {% endif %}
+        </span>
+     </ul>
+  </div>
+</div>
 
-{% block domready %}
-    var page = 1;
-    var empty_page = false;
-    var block_request = false;
-
-    $(window).scroll(function() {
-        var margin = $(document).height() - $(window).height() - 200;
-        if  ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
-		    block_request = true;
-		    page += 1;
-		    $.get('?page=' + page, function(data) {
-		        if(data == '')
-		        {
-		            empty_page = true;
-		        }
-		        else {
-                    block_request = false;
-                    $('#transaction-list').append(data);
-    	        }
-            });
-    	}
-    });
-{% endblock %}
+{% if transactions.has_other_pages %}
+  <ul class="pagination">
+    {% if transactions.has_previous %}
+      <li><a href="?page={{ transactions.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in transactions.paginator.page_range %}
+      {% if transactions.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if transactions.has_next %}
+      <li><a href="?page={{ transactions.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+{% include "pagination.html" with page=page_obj %}
+    {% endblock %}

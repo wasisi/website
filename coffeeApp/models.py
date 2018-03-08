@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
+
 
 # Create your models here.
 
@@ -35,8 +36,8 @@ class CoffeeTransactions(models.Model):
 	marks2 = models.CharField(max_length=100)
 	bagmark = models.CharField(max_length=20, null=True)
 	ref = models.CharField(max_length=20, null=True) # Changed from Ref2
-	producercode = models.ForeignKey('directoryApp.Producer', null=True) # Foreign Key. Changed from Ref
-	grade_gr = models.ForeignKey('CoffeeGrades', null=True) # Foreign Key
+	producercode = models.ForeignKey('directoryApp.Producer', null=True, on_delete=models.CASCADE) # Foreign Key. Changed from Ref
+	grade_gr = models.ForeignKey('CoffeeGrades', null=True,on_delete=models.CASCADE) # Foreign Key
 	bagsnr = models.IntegerField(null=True)
 	bagsboughtnr = models.IntegerField(null=True)
 	weight_kgr = models.IntegerField(null=True)

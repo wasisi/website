@@ -1,7 +1,7 @@
 from django import forms
-from .models import County
+from .models import CoffeeGrades
 
 class CoffeeGradeForm(forms.Form):
     grade = forms.CharField()
     size = forms.CharField()
-    description = forms.TextField()
+    description = forms.CharField()

@@ -23,14 +23,11 @@ from django.conf.urls.static import static # needed for file uploads in dev serv
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'account/', include('accountApp.urls')),
-    url(r'^',
-				include('mainApp.urls',
-								 namespace='mainApp',
-								 app_name='mainApp')),
+    url(r'^', include('mainApp.urls', namespace='mainApp')),
     url(r'^', include('contactApp.urls')),
     url(r'^', include('basicpagesApp.urls')),
-    url(r'^', include('directoryApp.urls', namespace='directoryApp', app_name='directoryApp')),
-    url(r'^', include('coffeeApp.urls', namespace='coffeeApp', app_name='coffeeApp')),   
+    url(r'^', include('directoryApp.urls', namespace='directoryApp')),
+    url(r'^', include('coffeeApp.urls', namespace='coffeeApp')),   
 ]
 
 # ONLY for DEVELOPMENT. Do not push to production

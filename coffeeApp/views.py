@@ -11,6 +11,10 @@ from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import CoffeeTransactions
+from .filters import coffeeAppFilter
+
+
+from . import filters
 
 
 def graph(request):
@@ -29,9 +33,9 @@ def play_count_by_month(request):
 def transaction_detail(request, id):
        transaction = get_object_or_404(CoffeeTransactions, id=id)
        return render(request,
-       	'transactions/detail.html',
-       	{'section': 'transactions',
-       	'transaction': transaction})
+        'transactions/detail.html',
+        {'section': 'transactions',
+        'transaction': transaction})
 
 #Use AJAX to like a transaction pg 154
 @ajax_required
@@ -55,27 +59,19 @@ def transaction_like(request):
 #List view for transactions
 @login_required
 def transaction_list(request):
-    transactions = CoffeeTransactions.objects.all()
-    paginator = Paginator(transactions, 8)
-    page = request.GET.get('page')
+    transactionlist = CoffeeTransactions.objects.all().order_by("id")
+    transaction_filter = coffeeAppFilter(request.GET, queryset=transactionlist)
+    transactionlist = transaction_filter.qs
+
+    paginator = Paginator(transactionlist, 100)
+    page = request.GET.get('page', 1)
     try:
         transactions = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer deliver the first page
         transactions = paginator.page(1)
     except EmptyPage:
-        if request.is_ajax():
-            # If the request is AJAX and the page is out of range return an empty page
-            return HttpResponse('')
-        # If page is out of range deliver last page of results
         transactions = paginator.page(paginator.num_pages)
-    if request.is_ajax():
-        return render(request,
-                      'transactions/list_ajax.html',
-                      {'section': 'transactions', 'transactions': transactions})
-    return render(request,
-                  'transactions/list.html',
-                   {'section': 'transactions', 'transactions': transactions})
 
-
-
+    return render(request, 'transactions/list.html', {'filter':transaction_filter,
+                'transactions':transactions,})
+    

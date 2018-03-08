@@ -59,7 +59,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT,'static')
 
-from django.core.urlresolvers import reverse_lazy # use reverse_lazy to build the URLs dynamically by their name.
+from django.urls import reverse_lazy # use reverse_lazy to build the URLs dynamically by their name.
 
 LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
 LOGIN_URL = reverse_lazy('login')

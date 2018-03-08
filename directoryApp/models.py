@@ -8,7 +8,7 @@ from utilsApp.models import AffiliationMixin
 from utilsApp.models import UniqueIDMixin
 
 # URL resolver needed by the get_absolute_url() 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 # Declare custom manager
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -36,7 +36,7 @@ class Producer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificatio
     disambiguation = models.CharField(max_length=200, null=True, blank=True)
     
     # Lazy referencing to model contained in another app
-    county_name = models.ForeignKey('countiesApp.County')
+    county_name = models.ForeignKey('countiesApp.County',on_delete=models.CASCADE)
 
     # Set managers to determine conditions that can be passed to views e.g. show only active
     objects = models.Manager() # The default manager.

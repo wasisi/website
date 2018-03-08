@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # This allows us to extend Django's user model by adding additional fields e.g. date of birth
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_of_birth = models.DateField(blank=True, null=True)
     photo = models.ImageField(upload_to='users/%Y/%m/%d', blank=True)
     # above will not work without installing pillow with pip install Pillow
@@ -23,8 +23,8 @@ class Profile(models.Model):
 
 
 class Contact(models.Model):
-	user_from = models.ForeignKey(User, related_name='rel_from_set') # Foreign key that creates the relationship. db  index automatically created
-	user_to = models.ForeignKey(User, related_name='rel_to_set') # Foreign key of the user that is being followed. db  index automatically created
+	user_from = models.ForeignKey(User, related_name='rel_from_set', on_delete=models.CASCADE) # Foreign key that creates the relationship. db  index automatically created
+	user_to = models.ForeignKey(User, related_name='rel_to_set',on_delete=models.CASCADE) # Foreign key of the user that is being followed. db  index automatically created
 	created = models.DateTimeField(auto_now_add=True, db_index=True) # additional field that we want to store
 
 	class Meta:
