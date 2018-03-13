@@ -1,11 +1,13 @@
 # urls.py
 from django.conf.urls import url
+from rest_framework import routers
 
 
 from .views import graph, play_count_by_month, transaction_detail, transaction_like, transaction_list
 
 #from . import views
 app_name = 'coffeeApp'
+
 urlpatterns = [
     #url(r'^graph/chart/$', views.graph, name='graph'),
     url(r'^graph/chart/$', graph),

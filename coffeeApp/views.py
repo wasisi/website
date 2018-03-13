@@ -59,19 +59,7 @@ def transaction_like(request):
 #List view for transactions
 @login_required
 def transaction_list(request):
-    transactionlist = CoffeeTransactions.objects.all().order_by("id")
-    transaction_filter = coffeeAppFilter(request.GET, queryset=transactionlist)
-    transactionlist = transaction_filter.qs
+    transactionlist = coffeeAppFilter(request.GET, queryset=CoffeeTransactions.objects.all().order_by("id"))
 
-    paginator = Paginator(transactionlist, 100)
-    page = request.GET.get('page', 1)
-    try:
-        transactions = paginator.page(page)
-    except PageNotAnInteger:
-        transactions = paginator.page(1)
-    except EmptyPage:
-        transactions = paginator.page(paginator.num_pages)
-
-    return render(request, 'transactions/list.html', {'filter':transaction_filter,
-                'transactions':transactions,})
+    return render(request, 'transactions/list.html', {'filter':transactionlist,})
     

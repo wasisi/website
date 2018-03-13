@@ -19,8 +19,8 @@ INSTALLED_APPS = [
     'coffeeApp',
     'sorl.thumbnail',
     'actions',
-    'rest_framework',
     'bootstrap3',
+    'rest_framework',
     'django_filters',
 ]
 
