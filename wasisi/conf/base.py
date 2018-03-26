@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'bootstrap3',
     'django_filters',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [
