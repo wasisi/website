@@ -1,25 +1,24 @@
-# Create your views here.
-# views.py
+#coffeeapp/utils.py
+
 from django.db import connections
 from django.db.models import Count
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth.decorators import login_required #for functions
+from django.contrib.auth.mixins import LoginRequiredMixin #for class based views
+
 from common.decorators import ajax_required
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import CoffeeTransactions
 from .filters import coffeeAppFilter
-
-from django_tables2 import RequestConfig
 from .tables import CoffeeTransactionsTable
+from .utils import FilteredTransactionsListView
+from .forms import CoffeeTransactionsFormHelper
 
-from django_filters import rest_framework as filters
-from rest_framework import generics
-
-from .serializers import CoffeeTransactionsSerializer
 
 def graph(request):
     return render(request, 'graph/graph.html')
@@ -60,10 +59,19 @@ def transaction_like(request):
             pass
     return JsonResponse({'status':'ko'})
 
-#List view for transactions
-@login_required
-def transaction_list(request):
-    table = CoffeeTransactionsTable(CoffeeTransactions.objects.all())
-    RequestConfig(request, paginate={'per_page': 100}).configure(table)
-    return render(request, 'transactions/tables2.html', {'table': table})
-    
+#Simple list view for transactions with no filter
+#@login_required
+#def transaction_list(request):
+    #table = CoffeeTransactionsTable(CoffeeTransactions.objects.all())
+    #RequestConfig(request, paginate={'per_page': 100}).configure(table)
+    ## Using RequestConfig automatically pulls values from request.GET and updates the table accordingly.
+    ## This enables data ordering and pagination.
+    #return render(request, 'transactions/transactionsfilter.html', {'table': table})
+
+#List view for transactions with filter
+class transaction_list(LoginRequiredMixin, FilteredTransactionsListView):
+    model = CoffeeTransactions
+    table_class = CoffeeTransactionsTable
+    filter_class = coffeeAppFilter
+    formhelper_class = CoffeeTransactionsFormHelper
+
