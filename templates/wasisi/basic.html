@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{basic_page.title}}{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">	
+	<h1>{{basic_page.title}}</h1>
+	<p>{{basic_page.body|safe}}</p>
+</div>
+</div>
+{% endblock %}

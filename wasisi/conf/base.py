@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django_filters',
     'django_tables2',
     'crispy_forms',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
