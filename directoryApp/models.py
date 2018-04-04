@@ -1,3 +1,5 @@
+# directoryApp.models.py
+
 from django.db import models
 
 # Add mixins from utilApp
