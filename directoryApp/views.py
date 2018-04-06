@@ -1,40 +1,33 @@
 from django.shortcuts import render
-
-# Import resources
-from .resources import DealerResource, ProducerResource
-
-# Needed for file import
-from tablib import Dataset
-
-# Needed to display content as list and return errors
-from django.shortcuts import render, get_object_or_404
-
-# Import dependencies
-from .models import Producer, Dealer
-from coffeeApp.views import CoffeeTransactions
-
-from .filters import ProducerFilter, DealerFilter, ProducerTransactionFilter
-from .tables import ProducerTable, DealerTable
-from .utils import FilteredProducerListView, FilteredDealerListView, FilteredProducerTransactionsView
-from .forms import ProducerFormHelper, DealerFormHelper
-
-from coffeeApp.tables import CoffeeTransactionsTable
-from coffeeApp.forms import CoffeeTransactionsFormHelper
-
-# Pagination
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-# Import generic views
 from django.views.generic import CreateView, DetailView, ListView
 from django.utils import timezone
-
-from django.db.models import Count
 from django.http import HttpResponse
-from common.decorators import ajax_required
 from django.contrib.auth.decorators import login_required #for functions
 from django.contrib.auth.mixins import LoginRequiredMixin #for class based views
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Count # for statistics
+from common.decorators import ajax_required
+from django.shortcuts import render, get_object_or_404 #render content as list/detail; return errors
 
+# Import resources
+from .resources import DealerResource, ProducerResource
+# Needed for file import
+from tablib import Dataset
+# Import models
+from .models import Producer, Dealer
+from coffeeApp.models import CoffeeTransactions
+# Import views
+from coffeeApp.views import CoffeeTransactions
+# Import tables
+from .tables import ProducerTable, DealerTable
+from coffeeApp.tables import CoffeeTransactionsTable
+# Import utils
+from .utils import FilteredProducerListView, FilteredDealerListView, FilteredProducerTransactionsView
+# Import filters
+from .filters import ProducerFilter, DealerFilter, ProducerTransactionFilter
+# Import forms
+from .forms import ProducerFormHelper, DealerFormHelper
+from coffeeApp.forms import CoffeeTransactionsFormHelper
 
 # Create your views here.
 def dealer_upload(request):
@@ -66,10 +59,27 @@ def producer_upload(request):
     return render(request, 'importexport/producerimport.html')    
 
 # Below uses in built DJANGO detail view
-#class ProducerDetailView(DetailView):
- #   template_name = 'directory/producer/detail.html'
-  #  model = Producer  
 
+class ProducerDetailView(DetailView):
+    template_name = 'directory/producer/detail.html'
+    model = Producer
+    table_class = CoffeeTransactionsTable
+    formhelper_class = CoffeeTransactionsFormHelper
+    filter_class = ProducerTransactionFilter
+    filterset_class = ProducerTransactionFilter
+
+    def get_context_data(self, **kwargs):
+    # Call the base implementation first to get a context
+        context = super(ProducerDetailView, self).get_context_data(**kwargs)
+    # Add extra context from another model
+        context['table'] = CoffeeTransactions.objects.filter(producercode__slug__exact=self.kwargs['slug'])
+        return context
+
+#def ProducerDetailView(request, id, slug):
+    #producer = get_object_or_404(Producer, id=id, slug=slug)
+    #producerid = Producer.objects.get(id=id)
+    #return render(request, 'directory/producer/detail.html', {'section': 'producers',
+     #                                               'producer': producer})    
 
 class ProducerTransactionsView(LoginRequiredMixin, FilteredProducerTransactionsView): 
     model = CoffeeTransactions
@@ -92,7 +102,6 @@ class ProducerListView(LoginRequiredMixin, FilteredProducerListView):
     table_class = ProducerTable
     filter_class = ProducerFilter
     formhelper_class = ProducerFormHelper    
-
 
 
 def DealerDetailView(request, id, slug):

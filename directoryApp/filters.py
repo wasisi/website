@@ -19,11 +19,11 @@ class ProducerFilter(django_filters.FilterSet):
         fields = ['county_name', 'producer_name']
     
 class ProducerTransactionFilter(django_filters.FilterSet):
-    # producercode = django_filters.CharFilter(id=id)
+    #producercode__producer_name = django_filters.CharFilter(lookup_expr='icontains')
     
     class Meta:
         model = CoffeeTransactions
-        fields = ['producercode', 'buyercode']
+        fields = ['id', 'producercode', 'buyercode']
 
 
 class DealerFilter(django_filters.FilterSet):
