@@ -13,10 +13,13 @@ from django.shortcuts import render, get_object_or_404
 from .models import Producer, Dealer
 from coffeeApp.views import CoffeeTransactions
 
-from .filters import ProducerFilter, DealerFilter
+from .filters import ProducerFilter, DealerFilter, ProducerTransactionFilter
 from .tables import ProducerTable, DealerTable
-from .utils import FilteredProducerListView, FilteredDealerListView
+from .utils import FilteredProducerListView, FilteredDealerListView, FilteredProducerTransactionsView
 from .forms import ProducerFormHelper, DealerFormHelper
+
+from coffeeApp.tables import CoffeeTransactionsTable
+from coffeeApp.forms import CoffeeTransactionsFormHelper
 
 # Pagination
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -64,33 +67,15 @@ def producer_upload(request):
 
 # Below uses in built DJANGO detail view
 #class ProducerDetailView(DetailView):
-    #template_name = 'directory/detail.html'
-    #model = Producer     
+ #   template_name = 'directory/producer/detail.html'
+  #  model = Producer  
 
-def ProducerDetailView(request, id, slug):
-    producer = get_object_or_404(Producer, id=id, slug=slug)
-    producerid = Producer.objects.get(id=id)
-    transactions = CoffeeTransactions.objects.filter(producercode=producerid)
-    paginator = Paginator(transactions, 8)
-    page = request.GET.get('page')
-    try:
-        transactions = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer deliver the first page
-        transactions = paginator.page(1)
-    except EmptyPage:
-        if request.is_ajax():
-            # If the request is AJAX and the page is out of range return an empty page
-            return HttpResponse('')
-        # If page is out of range deliver last page of results
-        transactions = paginator.page(paginator.num_pages)
-    if request.is_ajax():
-        return render(request,
-                      'transactions/producer_table_ajax.html',
-                      {'section': 'transactions', 'transactions': transactions})
-    return render(request, 'directory/producer/detail.html', {'section': 'producer',
-                                                    'producer': producer,
-                                                    'transactions': transactions})    
+
+class ProducerTransactionsView(LoginRequiredMixin, FilteredProducerTransactionsView): 
+    model = CoffeeTransactions
+    table_class = CoffeeTransactionsTable
+    filter_class = ProducerTransactionFilter
+    formhelper_class = CoffeeTransactionsFormHelper 
 
 # we are using custom published manager (published) declared in models.py
 # Using the generic ListView offered by Django. This base view is shorter and allows you to list objects of any kind.
@@ -106,7 +91,9 @@ class ProducerListView(LoginRequiredMixin, FilteredProducerListView):
     model = Producer
     table_class = ProducerTable
     filter_class = ProducerFilter
-    formhelper_class = ProducerFormHelper     
+    formhelper_class = ProducerFormHelper    
+
+
 
 def DealerDetailView(request, id, slug):
     dealer = get_object_or_404(Dealer, id=id, slug=slug)

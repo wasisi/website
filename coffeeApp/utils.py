@@ -27,3 +27,6 @@ class FilteredTransactionsListView(SingleTableView):
         context = super(FilteredTransactionsListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
         return context
+
+
+        

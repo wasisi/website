@@ -5,54 +5,30 @@
 {% load staticfiles %}
 {% block extra_css %}<link href="{% static "cssjsfonts/css/animate.css" %}" rel="stylesheet" type="text/css">{% endblock %}
 
+{% load render_table from django_tables2 %}
+{% load bootstrap3 %}
+{% load django_tables2 crispy_forms_tags %}
+
 {% block content %}
 <p> This is still a raw presentation of what is to come. Maps and Analytics to be added. Would be nice to have pins or clusters of producers who have bookmarked the coop or that are claiming to be members </p>
+
+
      <h1>{{ producer.producer_name }}</h1>
        <p>{{ producer.title }} ({{ producer.id }})</p>
        <p>{{ producer.county_name }}</p>
        <p>{{ producer.actor }}</p>
        <p>{{ producer.disambiguation }}</p>
+ 
        <h2>Nairobi Coffee Exchange Transactions</h2>
        <p>List of all the transactions of the producer here as an extract of <a href="/transactions/list/"> Transaction List</a> The fields to be displayed will be customised as a searchable table. </p>
 
-<div class='table-responsive' id='transaction-list'>
-  <table class='table table-striped'> 
-    <thread>
-      {% for transaction in transactions %}
-      <tr>
-        <td><a href="{{ transaction.get_absolute_url }}" class="title">{{ transaction.id }}</a></td><td>{{ transaction.saleno }}</td
-      </tr>
-     {% empty %}
-        There are no transactions for this producer yet.
-    {% endfor %}
-     </thread>
-  </table>
-</div>
+<body>
+<form action="" method="get"> 
+      {% crispy filter.form filter.form.helper %}
+    </form>
+    {% render_table table 'django_tables2/bootstrap.html' %}
+</body>
 
-{% endblock %}
-
-{% block domready %}
-    var page = 1;
-    var empty_page = false;
-    var block_request = false;
-
-    $(window).scroll(function() {
-        var margin = $(document).height() - $(window).height() - 200;
-        if  ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
-        block_request = true;
-        page += 1;
-        $.get('?page=' + page, function(data) {
-            if(data == '')
-            {
-                empty_page = true;
-            }
-            else {
-                    block_request = false;
-                    $('#transaction-list').append(data);
-              }
-            });
-      }
-    });
 {% endblock %}
 
 

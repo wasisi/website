@@ -8,12 +8,23 @@ import django_filters
 from django.contrib.auth.models import User
 from .models import Producer, Dealer
 
+from coffeeApp.models import CoffeeTransactions
+from coffeeApp.views import CoffeeTransactions
+
 class ProducerFilter(django_filters.FilterSet):
     producercode__producer_name = django_filters.CharFilter(lookup_expr='icontains')
-  
+
     class Meta:
         model = Producer
         fields = ['county_name', 'producer_name']
+    
+class ProducerTransactionFilter(django_filters.FilterSet):
+    # producercode = django_filters.CharFilter(id=id)
+    
+    class Meta:
+        model = CoffeeTransactions
+        fields = ['producercode', 'buyercode']
+
 
 class DealerFilter(django_filters.FilterSet):
     buyercode__title = django_filters.CharFilter(lookup_expr='icontains')
