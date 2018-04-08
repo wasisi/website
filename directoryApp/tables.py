@@ -16,7 +16,7 @@ class ProducerTable(tables.Table):
         template_name = 'django_tables2/bootstrap.html'
         fields = ('producer_name', 'title', 'actor', 'county_name', 'disambiguation') # fields to display
         #saleno = tables.LinkColumn('transaction_detail', args=[A('pk')])
-        empty_text = "There are no results matching the search criteria..."
+        empty_text = "There are no results matching this producer..."
         per_page = 100
 
 class DealerTable(tables.Table):
@@ -26,5 +26,5 @@ class DealerTable(tables.Table):
         model = Dealer
         template_name = 'django_tables2/bootstrap.html'
         fields = ('title', 'ref', 'website') # fields to display
-        empty_text = "There are no results matching the search criteria..."
+        empty_text = "There are no results matching this dealer..."
         per_page = 100

@@ -10,7 +10,6 @@ urlpatterns = [
     #url(r'^directory/producers$', views.producer_list, name='producer_list'), #replaced with class based view below
     url(r'^directory/producers$', views.ProducerListView.as_view(), name='producer_list'),
     url(r'^producer/(?P<id>\d+)/(?P<slug>[-\w]+)/$', views.ProducerDetailView.as_view(), name='producer_detail'),
-    url(r'^producer/(?P<id>\d+)/(?P<slug>[-\w]+)/$', views.ProducerTransactionsView.as_view(), name='producer_transactions'),
     url(r'^directory/dealers$', views.DealerListView.as_view(), name='dealer_list'),
     url(r'^dealer/(?P<id>\d+)/(?P<slug>[-\w]+)/$', views.DealerDetailView, name='dealer_detail'),
 ]

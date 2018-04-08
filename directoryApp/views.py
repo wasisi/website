@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.utils import timezone
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required #for functions
@@ -26,8 +26,9 @@ from .utils import FilteredProducerListView, FilteredDealerListView, FilteredPro
 # Import filters
 from .filters import ProducerFilter, DealerFilter, ProducerTransactionFilter
 # Import forms
-from .forms import ProducerFormHelper, DealerFormHelper
-from coffeeApp.forms import CoffeeTransactionsFormHelper
+from .forms import ProducerFormHelper, DealerFormHelper, ProducerTransactionsFormHelper
+# Django_tables2
+from django_tables2 import SingleTableView
 
 # Create your views here.
 def dealer_upload(request):
@@ -60,32 +61,30 @@ def producer_upload(request):
 
 # Below uses in built DJANGO detail view
 
-class ProducerDetailView(DetailView):
-    template_name = 'directory/producer/detail.html'
+class ProducerDetailView(LoginRequiredMixin, UpdateView, FilteredProducerTransactionsView):
     model = Producer
+    template_name = 'directory/producer/detail.html'
+    fields = '__all__'
+    
+    # the following lines are not needed to render DetailView and filtered table
     table_class = CoffeeTransactionsTable
-    formhelper_class = CoffeeTransactionsFormHelper
     filter_class = ProducerTransactionFilter
-    filterset_class = ProducerTransactionFilter
+    formhelper_class = ProducerTransactionsFormHelper
 
     def get_context_data(self, **kwargs):
     # Call the base implementation first to get a context
         context = super(ProducerDetailView, self).get_context_data(**kwargs)
     # Add extra context from another model
-        context['table'] = CoffeeTransactions.objects.filter(producercode__slug__exact=self.kwargs['slug'])
+        context['table'] = CoffeeTransactionsTable(CoffeeTransactions.objects.filter(producercode__slug__exact=self.kwargs['slug']))
+        context['form'] = ProducerTransactionsFormHelper
         return context
+    
 
 #def ProducerDetailView(request, id, slug):
     #producer = get_object_or_404(Producer, id=id, slug=slug)
     #producerid = Producer.objects.get(id=id)
     #return render(request, 'directory/producer/detail.html', {'section': 'producers',
-     #                                               'producer': producer})    
-
-class ProducerTransactionsView(LoginRequiredMixin, FilteredProducerTransactionsView): 
-    model = CoffeeTransactions
-    table_class = CoffeeTransactionsTable
-    filter_class = ProducerTransactionFilter
-    formhelper_class = CoffeeTransactionsFormHelper 
+     #                                               'producer': producer})     
 
 # we are using custom published manager (published) declared in models.py
 # Using the generic ListView offered by Django. This base view is shorter and allows you to list objects of any kind.

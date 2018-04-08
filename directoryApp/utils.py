@@ -10,7 +10,6 @@ from .models import Producer, Dealer
 from .filters import ProducerFilter, DealerFilter, ProducerTransactionFilter
 
 from coffeeApp.models import CoffeeTransactions
-from coffeeApp.filters import coffeeAppFilter
 from coffeeApp.tables import CoffeeTransactionsTable
 
 class FilteredProducerListView(SingleTableView):
