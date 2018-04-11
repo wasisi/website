@@ -3,7 +3,7 @@ Building up on the [Kenya Coffee Directory, K.C.T.A (2012)](https://issuu.com/kc
 
 ## Installation
 
-Create virtual environment
+Create virtual environment and install python version 3.6. This will probably be different to what your computer has.
 
 ```sh
 $ sudo pip3 install virtualenv
