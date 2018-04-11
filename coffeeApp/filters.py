@@ -10,7 +10,6 @@ import django_filters
 from django.contrib.auth.models import User
 from .models import CoffeeTransactions, CoffeeGrades
 
-#class coffeeAppFilter(filters.FilterSet):
 class coffeeAppFilter(django_filters.FilterSet):
     # producercode__producer_name = django_filters.CharFilter(lookup_expr='icontains')
     # buyercode__title = django_filters.CharFilter(lookup_expr='icontains')

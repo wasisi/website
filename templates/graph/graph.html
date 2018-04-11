@@ -5,6 +5,8 @@
 {% block title %}Graph{% endblock %}
 
 {% block content %}
+<div class="container-fluid">
+<div class="row"> 
 
 <style>
 .axis path,
@@ -87,7 +89,8 @@ d3.json("{% url "coffeeApp:play_count_by_month" %}", function(error, data) { //y
       .attr("class", "line")
       .attr("d", line);
 });
-
 </script>
 </body>
+</div>
+</div>
 {% endblock %}

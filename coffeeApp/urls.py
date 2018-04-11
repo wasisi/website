@@ -1,6 +1,9 @@
-# urls.py
+#coffeeapp/urls.py
+
 from django.conf.urls import url
 from rest_framework import routers
+
+from coffeeApp import views
 
 
 from .views import graph, play_count_by_month, transaction_detail, transaction_like, transaction_list
@@ -14,5 +17,5 @@ urlpatterns = [
     url(r'^play_count_by_month', play_count_by_month, name='play_count_by_month'),
     url(r'^detail/(?P<id>\d+)/$', transaction_detail, name='transaction_detail'),
     url(r'^like/$', transaction_like, name='like_transaction'),
-    url(r'^transactions/list/$', transaction_list, name='transaction_list'),
+    url(r'^transactions/list/$', transaction_list.as_view(), name='transaction_list'),
 ]

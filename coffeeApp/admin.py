@@ -20,7 +20,7 @@ admin.site.register(CoffeeGrades, CoffeeGradesAdmin)
 
 class CoffeeTransactionsAdmin(ImportExportModelAdmin):
 	list_display = ['isodate', 'transnr','producercode', 'buyercode','grade_gr']
-	#raw_id_fields = ('PRODUCERCODE',) #replaces dropdown with search. Affects imports because Django expects ID field
+	#raw_id_fields = ('producercode',) #replaces dropdown with search. Affects imports because Django expects ID field
 	ordering = ['-isodate'] #The - sign allows us to sort by the newest items first
 	resource_class = CoffeeTransactionsResource 
 	#you need to declare the resource_class or you will get errors like

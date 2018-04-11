@@ -1,28 +1,28 @@
 <!-- directory/dealer/list.html -->
 
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block title %}Dealer list{% endblock %}
 {% load staticfiles %}
 {% block extra_css %}<link href="{% static "cssjsfonts/css/animate.css" %}" rel="stylesheet" type="text/css">{% endblock %}
 
+{# templates/transactions/tables2.html #}
+
+{% load render_table from django_tables2 %}
+{% load bootstrap3 %}
+{% load django_tables2 crispy_forms_tags %}
+
+
 {% block content %}
-<h1>Kenya Coffee Dealers</h1>
-<div class='table-responsive' id='transaction-list'>
-  <table class='table table-striped'> 
-    <thread>
-    <th>
-    	<td>Reference</td>
-      	<td>Website</td>
-   	</th>
-    {% for dealer in dealers %}	
-      <tr>
-        <td><a href="{{ dealer.get_absolute_url }}" class="title">{{ dealer.title }}</a></td>
-        <td>{{ dealer.ref }}</td>
-        <td>{{ dealer.website }}</td>
-      </tr>
-    {% endfor %}
-     </thread>
-  </table>
-</div>
-{% include "pagination.html" with page=page_obj %}
+
+<h2>Kenya Coffee Dealers</h2>
+
+<p>Organisations that purchase coffee at the Nairobi Coffee Exchange</p>
+
+<body>
+  <form action="" method="get"> 
+      {% crispy filter.form filter.form.helper %}
+  </form>
+    {% render_table table 'django_tables2/bootstrap.html' %}
+</body>
+
 {% endblock %}

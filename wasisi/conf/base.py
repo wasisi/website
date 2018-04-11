@@ -22,6 +22,9 @@ INSTALLED_APPS = [
     'bootstrap3',
     'rest_framework',
     'django_filters',
+    'django_tables2',
+    'crispy_forms',
+    'tinymce',
 ]
 
 MIDDLEWARE = [

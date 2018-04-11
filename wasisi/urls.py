@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^', include('contactApp.urls')),
     url(r'^', include('basicpagesApp.urls')),
     url(r'^', include('directoryApp.urls', namespace='directoryApp')),
-    url(r'^', include('coffeeApp.urls', namespace='coffeeApp')),   
+    url(r'^', include('coffeeApp.urls', namespace='coffeeApp')),
+    url(r'^tinymce/', include('tinymce.urls')),   
 ]
 
 # ONLY for DEVELOPMENT. Do not push to production

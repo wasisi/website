@@ -1,3 +1,5 @@
+# directoryApp.models.py
+
 from django.db import models
 
 # Add mixins from utilApp
@@ -59,9 +61,10 @@ class Dealer(UniqueTitleMixin,ActiveMixin,AffiliationMixin,CreationModificationD
     Model for dealer
     """
     
-    website = models.CharField(max_length=200)
+    website = models.CharField(max_length=200, null=True, blank=True)
     ref = models.CharField(max_length=200, unique=True)
     active_website =models.BooleanField(default=True)
+    notes = models.CharField(max_length=250, null=True, blank=True)
 
     class Meta:
         db_table='Dealer'
