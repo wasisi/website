@@ -47,15 +47,11 @@ $ python manage.py collectstatic
 
 ## Usage example
 
-A farmer belonging to a cooperative can go to the coffee directory page and search for his/her cooperative and then click on the cooperative to find out all the coffee that the cooperative has sold at the auction since February 2015. Please note that this may not include coffee that is sold as bulk coffee. The farmer can then have the information needed to mobilise other farmers to demand transparency and justification for the money paid for delivered coffee. 
-
-A coffee importer who depends on a registered dealer based in Kenya can track the prices paid and volumes bought by the contracted dealer(s).
-
-County governments and relevant organisations from coffee producing areas can monitor trends using the analytics per county (to be developed) and make appropriate decisions or interventions.
-
-Subscribed farmers can provide insights and share stories that can be shared with coffee consumers to help market coffee and raise awareness on issues that the farmers are facing.
-
-Potential for coffee importers to engage directly with the producers and negotiate for direct sales.
+* A farmer belonging to a cooperative can go to the coffee directory page and search for his/her cooperative and then click on the cooperative to find out all the coffee that the cooperative has sold at the auction since February 2015. Please note that this may not include coffee that is sold as bulk coffee. The farmer can then have the information needed to mobilise other farmers to demand transparency and justification for the money paid for delivered coffee. 
+* A coffee importer who depends on a registered dealer based in Kenya can track the prices paid and volumes bought by the contracted dealer(s).
+* County governments and relevant organisations from coffee producing areas can monitor trends using the analytics per county (to be developed) and make appropriate decisions or interventions.
+* Subscribed farmers can provide insights and share stories that can be shared with coffee consumers to help market coffee and raise awareness on issues that the farmers are facing.
+* Potential for coffee importers to engage directly with the producers and negotiate for direct sales.
 
 
 ## Development setup
