@@ -80,7 +80,7 @@ Testing instructions needs to be developed (Help needed)
 
 Benedict Omare – [@benaboki](https://twitter.com/benaboki) – benaboki@hotmail.fr
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
+Distributed under the MIT license. See ``LICENSE`` for more information.
 
 [https://github.com/benaboki](https://github.com/benaboki/)
 
