@@ -60,6 +60,7 @@ Register the models to the database. This also needs to be done each time you ma
 $ python manage.py makemigrations
 $ python manage.py migrate
 ```
+For more details about configuring and further developing the app please refer to [Django Documentation](https://docs.djangoproject.com/en/1.7/intro/tutorial01/). Note that these instructions are for Django 1.7 but they provide more details than those of Django 1.11.
 
 ## Usage example
 
