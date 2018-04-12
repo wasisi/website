@@ -32,6 +32,11 @@ Start the project
 ```sh
 $ django-admin startproject mycoffeeproject
 ```
+Add the secret_key in wasisi/settings.py
+```sh
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'add secret key between apostrophes'
+```
 Run the project
 ```sh
 $ python manage.py runserver
@@ -40,9 +45,20 @@ Stop the project
 ```sh
 # hold Ctrl + C
 ```
-Collect static files e.g. CSS, js, ..
+Collect static files contained in the static folder e.g. CSS,js, images and fonts. This should be done whenever there are additions or changes to these files. 
+* CSS, fonts and js are contained in /static/cssjsfonts/
 ```sh
 $ python manage.py collectstatic
+```
+Configure the database. We are using mysql
+* settings, username and password for the database are contained in wasisi/conf/dev.py
+```sh
+$ sudo pip install mysqlclient
+```
+Register the models to the database. This also needs to be done each time you make any change to any of the models e.g. adding or modifying a field
+```sh
+$ python manage.py makemigrations
+$ python manage.py migrate
 ```
 
 ## Usage example
