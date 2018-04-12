@@ -1,5 +1,5 @@
 # Product Name
-Building up on the [Kenya Coffee Directory, K.C.T.A (2012)](https://issuu.com/kcta.coffee.directory/docs/kcta2012) to update the list of Kenya coffee producers and buyers based on transactions reported by the [Nairobi Coffee Auction weekly](http://nairobicoffeeexchange.co.ke). The website links coffee transactions at the auction to their respective producers and buyers. This will allow farmers and overseas coffee importers, who depend on intermediaries at the auction, to be able to follow the auction remotely and engage in dialogue to negotiate better deals for themselves.
+Building up on the [Kenya Coffee Directory, K.C.T.A (2012)](https://issuu.com/kcta.coffee.directory/docs/kcta2012) to update the list of Kenya coffee producers and buyers based on transactions reported by the [Nairobi Coffee Auction weekly](http://nairobicoffeeexchange.co.ke). The website links coffee transactions at the auction to their respective producers and buyers. This will allow farmers and coffee buyers, who depend on intermediaries at the auction, to be able to follow the auction remotely and engage in dialogue to negotiate better deals for themselves.
 
 ## Installation
 
