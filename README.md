@@ -80,6 +80,16 @@ $ pip install djangorestframework==3.7.7
 ```
 Testing instructions needs to be developed (Help needed)
 
+## Deployment set up
+The following settings contained in wasisi/settings.py are only needed for local development and should be removed/modified when deploying the code to live environment
+```sh
+# Allow email testing in development server
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Allow file upload in development server
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+```
+
 ## Release History
 * 0.1.1
     * Working versions of the coffee directory and transactions app
@@ -90,7 +100,7 @@ Testing instructions needs to be developed (Help needed)
 
 ## Meta
 
-Benedict Omare – [@benaboki](https://twitter.com/benaboki) – benaboki@hotmail.fr
+Benedict Omare – [@benaboki](https://twitter.com/benaboki) – oasis@wasisivillage.com
 
 Distributed under the MIT license. See ``LICENSE`` for more information.
 
