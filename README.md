@@ -115,3 +115,7 @@ https://github.com/wasisi/website/edit/master/README.md#fork-destination-box
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
+
+## Similar sites
+http://www.coffeetransparency.com/c/ke/
+
