@@ -79,24 +79,6 @@ class ProducerDetailView(LoginRequiredMixin, UpdateView, FilteredProducerTransac
         context['form'] = ProducerTransactionsFormHelper
         return context
     
-class ProducerTransactionsView(LoginRequiredMixin, UpdateView, FilteredProducerTransactionsView):
-    model = CoffeeTransactionsTable
-    template_name = 'directory/producer/detail.html'
-    fields = '__all__'
-    
-    # the following lines are not needed to render DetailView and filtered table
-    table_class = CoffeeTransactionsTable
-    filter_class = ProducerTransactionFilter
-    formhelper_class = ProducerTransactionsFormHelper
-
-    def get_context_data(self, **kwargs):
-    # Call the base implementation first to get a context
-        context = super(ProducerDetailView, self).get_context_data(**kwargs)
-    # Add extra context from another model
-        context['table'] = CoffeeTransactionsTable(CoffeeTransactions.objects.filter(producercode__slug__exact=self.kwargs['slug']))
-        context['form'] = ProducerTransactionsFormHelper
-        return context
-
 #def ProducerDetailView(request, id, slug):
     #producer = get_object_or_404(Producer, id=id, slug=slug)
     #producerid = Producer.objects.get(id=id)
