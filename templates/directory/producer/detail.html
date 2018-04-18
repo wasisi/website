@@ -3,6 +3,7 @@
 {% extends 'base.html' %}
 {% block title %}{{ producer.producer_name }}{% endblock %}
 {% load staticfiles %}
+{% load directoryApp_tags %}
 {% block extra_css %}<link href="{% static "cssjsfonts/css/animate.css" %}" rel="stylesheet" type="text/css">{% endblock %}
 
 {% load django_tables2 crispy_forms_tags %}
@@ -11,16 +12,12 @@
 
 
 {% block content %}
-<p> This is still a raw presentation of what is to come. Maps and Analytics to be added. Would be nice to have pins or clusters of producers who have bookmarked the coop or that are claiming to be members </p>
-
-
-     <h1>{{ producer.producer_name }}</h1>
-       <p>{{ producer.title }} ({{ producer.id }})</p>
-       <p>{{ producer.county_name }}</p>
-       <p>{{ producer.actor }}</p>
-       <p>{{ producer.disambiguation }}</p>
- 
-       <p>List of all the transactions at the Nairobi Coffe Exchange of the producer here as an extract of <a href="/transactions/list/"> Transaction List</a> The fields to be displayed will be customised as a searchable table. </p>
+<h1>{{ producer.producer_name }}</h1>
+<p>{{ producer.title }}</p>
+<p>{{ producer.county_name }}</p>
+<p>{{ producer.actor }}</p>
+<p>{{ producer.disambiguation }}</p>
+<p>List of all the transactions at the Nairobi Coffee Exchange of the producer here as an extract of the {% total_transactions %} records in the <a href="/transactions/list/"> Transaction List</a>. This is still a raw presentation of what is to come. Maps and Analytics to be added. Would be nice to have pins or clusters of producers who have bookmarked the coop or that are claiming to be members </p>
 
 <body>
   
@@ -32,6 +29,3 @@
 
 {% endblock %}
 
-
-
-f

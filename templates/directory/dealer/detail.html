@@ -6,13 +6,27 @@
 {% block extra_css %}<link href="{% static "cssjsfonts/css/animate.css" %}" rel="stylesheet" type="text/css">{% endblock %}
 
 {% block content %}
-<p> This is still a raw presentation of what is to come.</p>
-     <h1>{{ dealer.title }}</h1>
-       <p>{{ dealer.title }} ({{ dealer.id }})</p>
-       <p>{{ dealer.ref }}</p>
-       <p>{{ dealer.website }}</p>
-       <h2>Nairobi Coffee Exchange Transactions</h2>
-       <p>List of all the transactions of the dealer here as an extract of <a href="/transactions/list/"> Transaction List</a> The fields to be displayed will be customised as a searchable table. </p>
+<h1>{{ dealer.title }}</h1>
+
+<table>
+  <tr>
+    <td>
+      NCE Reference
+    </td>
+    <td>
+      {{ dealer.ref }}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Website
+    </td>
+    <td>
+      {{ dealer.website }}
+    </td>
+  </tr>
+</table>
+<p>List of all the transactions of the dealer here as an extract of <a href="/transactions/list/"> Transaction List</a> The fields to be displayed will be customised as a searchable table. </p>
 
 <div class='table-responsive' id='transaction-list'>
   <table class='table table-striped'> 
